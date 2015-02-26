@@ -13,6 +13,13 @@ import static org.junit.Assert.*;
  * Created by sanjanar on 25/02/15.
  */
 public class LibraryTest {
+
+    @Test
+    public void shouldHaveEmptyBookListUponCreation() throws Exception {
+        Library library=new Library();
+        assertEquals(0,library.getBooks().size());
+    }
+
     @Test
     public void shouldABookToListOfBooks() throws Exception {
         Library library = new Library();
