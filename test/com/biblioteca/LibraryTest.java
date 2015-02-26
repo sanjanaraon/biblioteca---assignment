@@ -1,11 +1,16 @@
 package com.biblioteca;
 
+import org.hamcrest.Matcher;
 import org.junit.Assert;
 import org.junit.Assert.*;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 //import static org.hamcrest.MatcherAssert.assertThat;
+import java.util.List;
+
+import static java.util.Arrays.asList;
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.core.IsCollectionContaining.hasItem;
 import static org.junit.Assert.*;
 
@@ -93,4 +98,17 @@ public class LibraryTest {
         library.returnBook(book1);
     }
 
+    @Test
+    public void shouldReturnListOfAvailableBooksToBeCheckedOut() throws Exception {
+        Library library = new Library();
+        Book book1 = new Book("S C J P", "Kathy Serra", 2006);
+        Book book2 = new Book("Let us C", "Yeshwanth", 2000);
+        Book book3 = new Book("The art of computer programming", "Donald ", 1968);
+        library.addBook(book1);
+        library.addBook(book2);
+        library.addBook(book3);
+        assertThat(library.getAvailableBooks(), is(asList(book1,book2,book3)));
+        library.checkOut(book2);
+        assertThat(library.getAvailableBooks(), is(asList(book1, book3)));
+    }
 }
