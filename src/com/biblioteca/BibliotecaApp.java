@@ -15,6 +15,7 @@ public class BibliotecaApp {
 
     public BibliotecaApp() {
         this(new Library());
+        library.initializeBookList();
     }
 
     public String displayMessage() {
@@ -26,7 +27,6 @@ public class BibliotecaApp {
                 " 1 ---- Book Details \n" +
                 " 2 ---- Exit";
     }
-
 
     public String displayBookDetails() {
         List<Book> bookList=library.getAvailableBooks();
@@ -43,5 +43,9 @@ public class BibliotecaApp {
 
     public void checkOutFromLibrary(Book book) throws InvalidBookException {
         library.checkOut(book);
+    }
+
+    public void returnBookFromLibrary(Book book) throws InvalidBookException {
+        library.returnBook(book);
     }
 }
