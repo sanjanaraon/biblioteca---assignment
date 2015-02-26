@@ -1,6 +1,8 @@
 package com.biblioteca;
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -22,7 +24,10 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void shouldDisplayBookDetailsWhenUserTypesOption1() throws Exception {
-
+    public void shouldDisplayBookDetails() throws Exception {
+        BibliotecaApp bibliotecaApp=new BibliotecaApp();
+        Library library=new Library();
+        List<Book> expectedBooks=library.getBooks();
+        assertEquals(expectedBooks, bibliotecaApp.displayBookDetails());
     }
 }
