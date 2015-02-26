@@ -7,6 +7,6 @@ import org.junit.Test;
 public class UserTest {
     @Test
     public void shouldDisplayWelcomeMessage() throws Exception {
-      //  User user=new User();
+        User user=new User();
     }
 }
