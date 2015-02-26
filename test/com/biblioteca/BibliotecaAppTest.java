@@ -30,4 +30,27 @@ public class BibliotecaAppTest {
         List<Book> expectedBooks=library.initializeBookList();
         assertEquals(expectedBooks, bibliotecaApp.getBooks());
     }
+
+    @Test
+    public void shouldDisplayTheListOfBooksInTableForm() throws Exception {
+        BibliotecaApp bibliotecaApp=new BibliotecaApp();
+        String expected=bookListInTable(bibliotecaApp.getBooks());
+        assertEquals(expected,bibliotecaApp.displayBookDetails());
+    }
+
+    private String bookListInTable(List<Book> books) {
+        String result=" ";
+        for (Book b:books){
+            if(b.isCheckedOut()==false)
+            result+= b.getTitle()+"    |"+b.getAuthor()+"   |"+b.getYear()+"\n";
+        }
+        return result;
+    }
+
+    @Test
+    public void shouldCheckoutABook() throws Exception {
+        BibliotecaApp bibliotecaApp=new BibliotecaApp();
+        Book book1 = new Book("S C J P", "Kathy Serra", 2006);
+        bibliotecaApp.checkOutFromLibrary(book1);
+    }
 }
