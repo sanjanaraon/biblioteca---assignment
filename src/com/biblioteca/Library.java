@@ -43,4 +43,18 @@ public class Library {
             }
         }
     }
+
+    public List<Book> initializeBookList() {
+        Book book1 = new Book("S C J P", "Kathy Serra", 2006);
+        addBook(book1);
+        Book book2 = new Book("Let us C", "Yeshwanth", 2000);
+        addBook(book2);
+        Book book3 = new Book("The art of computer programming", "Donald ", 1968);
+       addBook(book3);
+        Book book4 = new Book("Learning Python", "Mark Lutz", 1999);
+        addBook(book4);
+        return books;
+    }
+
+
 }
