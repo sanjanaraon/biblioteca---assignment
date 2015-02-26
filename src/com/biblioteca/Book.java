@@ -46,4 +46,13 @@ public class Book {
                 ", checkedOut=" + checkedOut +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object newBook) {
+        Book book=(Book)newBook;
+        if(this.title==book.title && this.author==book.author && this.year==book.year){
+            return true;
+        }
+        return false;
+    }
 }
