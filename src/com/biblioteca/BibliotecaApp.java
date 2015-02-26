@@ -1,5 +1,6 @@
 package com.biblioteca;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,7 +15,7 @@ public class BibliotecaApp {
     }
 
     public BibliotecaApp() {
-        this(new Library());
+        this.library=new Library();
         library.initializeBookList();
     }
 
@@ -25,7 +26,8 @@ public class BibliotecaApp {
     public String displayMainMenu() {
         return "Main menu \n" +
                 " 1 ---- Book Details \n" +
-                " 2 ---- Exit";
+                " 2 ---- Exit\n" +
+                "Enter your choice";
     }
 
     public String displayBookDetails() {
@@ -47,5 +49,25 @@ public class BibliotecaApp {
 
     public void returnBookFromLibrary(Book book) throws InvalidBookException {
         library.returnBook(book);
+    }
+
+    public Book getBook(String title) {
+        for(Book b:library.books){
+            if(title.equalsIgnoreCase(b.getTitle())){
+                return b;
+            }
+        }
+        return null;
+    }
+
+
+    public String borrowedBooks() {
+        String result=" ";
+        for(Book b:library.getBooks()){
+            if(b.isCheckedOut()==true){
+                result+= b.getTitle()+"    |"+b.getAuthor()+"   |"+b.getYear()+"\n";
+            }
+        }
+        return result;
     }
 }
