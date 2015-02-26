@@ -10,8 +10,7 @@ import static org.mockito.Mockito.when;
  */
 public class AppStarterTest {
     @Test
-    public void shouldDisplayWelcomeMessage() throws Exception {
+    public void shouldDisplayDetailsWhenUserEnters1() throws Exception {
         AppStarter appStarter =new AppStarter();
-
     }
 }
