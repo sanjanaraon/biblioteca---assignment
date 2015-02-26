@@ -6,10 +6,15 @@ import java.util.List;
  * Created by sanjanar on 26/02/15.
  */
 public class BibliotecaApp {
-    private Library library= new Library();
+    private Library library;
+
+    public BibliotecaApp(Library library) {
+        this.library = library;
+        this.library.initializeBookList();
+    }
 
     public BibliotecaApp() {
-        library.initializeBookList();
+        this(new Library());
     }
 
     public String displayMessage() {
@@ -23,12 +28,20 @@ public class BibliotecaApp {
     }
 
 
-    public List<Book> displayBookDetails() {
-
-        return null;
+    public String displayBookDetails() {
+        List<Book> bookList=library.getAvailableBooks();
+        String result=" ";
+        for(Book b:bookList){
+            result+= b.getTitle()+"    |"+b.getAuthor()+"   |"+b.getYear()+"\n";
+        }
+        return result;
     }
 
     public List<Book> getBooks() {
         return library.getBooks();
+    }
+
+    public void checkOutFromLibrary(Book book) throws InvalidBookException {
+        library.checkOut(book);
     }
 }
