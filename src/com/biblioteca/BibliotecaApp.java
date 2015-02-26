@@ -1,5 +1,7 @@
 package com.biblioteca;
 
+import java.util.List;
+
 /**
  * Created by sanjanar on 26/02/15.
  */
@@ -12,5 +14,9 @@ public class BibliotecaApp {
         return "Main menu \n" +
                 " 1 ---- Book Details \n" +
                 " 2 ---- Exit";
+    }
+
+    public List<Book> displayBookDetails() {
+        return new Library().getBooks();
     }
 }
