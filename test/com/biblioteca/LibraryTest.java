@@ -3,6 +3,7 @@ package com.biblioteca;
 import org.hamcrest.Matcher;
 import org.junit.Assert;
 import org.junit.Assert.*;
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -18,16 +19,19 @@ import static org.junit.Assert.*;
  * Created by sanjanar on 25/02/15.
  */
 public class LibraryTest {
+    Library library;
 
+    @Before
+    public void setUp(){
+        library=new Library();
+    }
     @Test
     public void shouldHaveEmptyBookListUponCreation() throws Exception {
-        Library library=new Library();
         assertEquals(0,library.getBooks().size());
     }
 
     @Test
     public void shouldABookToListOfBooks() throws Exception {
-        Library library = new Library();
         Book book = new Book("S C J P", "Kathy Serra", 2006);
         library.addBook(book);
         assertThat(library.getBooks(), hasItem(book));
@@ -35,7 +39,6 @@ public class LibraryTest {
 
     @Test
     public void shouldRemoveBookFromListWhenItIsCheckedOut() throws Exception {
-        Library library = new Library();
         Book book1 = new Book("S C J P", "Kathy Serra", 2006);
         library.addBook(book1);
         Book book2 = new Book("Let us C", "Yeshwanth", 2000);
@@ -47,7 +50,6 @@ public class LibraryTest {
 
     @Test(expected = InvalidBookException.class)
     public void shouldFailToRemoveBookWhenThereIsSomeMistakeInBookDetails()  throws Exception{
-        Library library = new Library();
         Book book1 = new Book("S C J P", "Kathy Serra", 2006);
         library.addBook(book1);
         Book book2 = new Book("Let us C", "Yeshwanth", 2000);
@@ -58,7 +60,6 @@ public class LibraryTest {
 
     @Test(expected = InvalidBookException.class)
     public void shouldFailToRemoveBookWhenTheBookIsAlreadyCheckedOut()  throws Exception{
-        Library library = new Library();
         Book book1 = new Book("S C J P", "Kathy Serra", 2006);
         library.addBook(book1);
         book1.setCheckedOut(true);
@@ -69,7 +70,6 @@ public class LibraryTest {
 
     @Test
     public void shouldAddTheBookReturnedToBooksList() throws Exception {
-        Library library=new Library();
         Book book1 = new Book("S C J P", "Kathy Serra", 2006);
         library.addBook(book1);
         Book book2 = new Book("Let us C", "Yeshwanth", 2000);
@@ -80,7 +80,6 @@ public class LibraryTest {
 
     @Test(expected = InvalidBookException.class)
     public void shouldThrowAExceptionWhenInvalidBookIsAddedToBooksList() throws Exception {
-        Library library=new Library();
         Book book1 = new Book("S C J P", "Kathy Serra", 2006);
         library.addBook(book1);
         Book book2 = new Book("Let us C", "Yeshwanth", 2000);
@@ -90,7 +89,6 @@ public class LibraryTest {
 
     @Test(expected = InvalidBookException.class)
     public void shouldThrowExceptionWhenUnCheckedBookIsAddedToBookList() throws Exception {
-        Library library=new Library();
         Book book1 = new Book("S C J P", "Kathy Serra", 2006);
         library.addBook(book1);
         Book book2 = new Book("Let us C", "Yeshwanth", 2000);
@@ -100,7 +98,6 @@ public class LibraryTest {
 
     @Test
     public void shouldReturnListOfAvailableBooksToBeCheckedOut() throws Exception {
-        Library library = new Library();
         Book book1 = new Book("S C J P", "Kathy Serra", 2006);
         Book book2 = new Book("Let us C", "Yeshwanth", 2000);
         Book book3 = new Book("The art of computer programming", "Donald ", 1968);
