@@ -1,9 +1,14 @@
 package com.biblioteca;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by sanjanar on 26/02/15.
@@ -49,8 +54,14 @@ public class BibliotecaAppTest {
 
     @Test
     public void shouldCheckoutABook() throws Exception {
-        BibliotecaApp bibliotecaApp=new BibliotecaApp();
         Book book1 = new Book("S C J P", "Kathy Serra", 2006);
+        Library mockLibrary = mock(Library.class);
+
+        doNothing().when(mockLibrary).checkOut(book1);
+
+        BibliotecaApp bibliotecaApp = new BibliotecaApp(mockLibrary);
         bibliotecaApp.checkOutFromLibrary(book1);
+
+        verify(mockLibrary).checkOut(book1);
     }
 }
