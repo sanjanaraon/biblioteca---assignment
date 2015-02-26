@@ -57,4 +57,13 @@ public class Library {
     }
 
 
+    public List<Book> getAvailableBooks() {
+        List<Book> availableBook=new ArrayList<Book>();
+        for(Book b:books){
+            if(b.isCheckedOut()==false){
+                availableBook.add(b);
+            }
+        }
+        return availableBook;
+    }
 }
