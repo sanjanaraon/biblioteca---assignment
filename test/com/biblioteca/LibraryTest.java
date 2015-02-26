@@ -45,14 +45,14 @@ public class LibraryTest {
     }
 
     @Test(expected = InvalidBookException.class)
-    public void shouldFailToRemoveBookWhenTheBookIsNotCheckedOut()  throws Exception{
+    public void shouldFailToRemoveBookWhenTheBookIsAlreadyCheckedOut()  throws Exception{
         Library library = new Library();
         Book book1 = new Book("S C J P", "Kathy Serra", 2006);
         library.addBook(book1);
+        book1.setCheckedOut(true);
         Book book2 = new Book("Let us C", "Yeshwanth", 2000);
         library.addBook(book2);
-        Book book3=new Book("S C J P", "Kathy Serra", 2006);
-        library.checkOut(book3);
+        library.checkOut(book1);
     }
 
     @Test
@@ -84,7 +84,6 @@ public class LibraryTest {
         Book book2 = new Book("Let us C", "Yeshwanth", 2000);
         library.addBook(book2);
         library.returnBook(book1);
-        
     }
 
 }
