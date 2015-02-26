@@ -24,10 +24,10 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void shouldDisplayBookDetails() throws Exception {
+    public void shouldHaveAListOfBooksWhenTheAppIsInitialized() throws Exception {
         BibliotecaApp bibliotecaApp=new BibliotecaApp();
         Library library=new Library();
-        List<Book> expectedBooks=library.getBooks();
-        assertEquals(expectedBooks, bibliotecaApp.displayBookDetails());
+        List<Book> expectedBooks=library.initializeBookList();
+        assertEquals(expectedBooks, bibliotecaApp.getBooks());
     }
 }
