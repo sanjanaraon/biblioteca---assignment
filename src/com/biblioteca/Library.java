@@ -38,8 +38,9 @@ public class Library {
 
     private void resetCheckOut(Book book, boolean flag) {
         for (Book b : books) {
-            if (b == book) {
+            if (b.equals(book)) {
                 b.setCheckedOut(flag);
+                break;
             }
         }
     }
@@ -65,5 +66,15 @@ public class Library {
             }
         }
         return availableBook;
+    }
+
+    public List<Book> getBorrowedBooks() {
+        List<Book> borrowedBooks=new ArrayList<Book>();
+        for(Book b:books){
+            if(b.isCheckedOut()==true){
+                borrowedBooks.add(b);
+            }
+        }
+        return borrowedBooks;
     }
 }

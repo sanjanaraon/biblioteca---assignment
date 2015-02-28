@@ -19,7 +19,7 @@ public class BibliotecaApp {
         library.initializeBookList();
     }
 
-    public String displayMessage() {
+    public String displayWelcomeMessage() {
         return "Welcome to Biblioteca \n The app to borrow and return the books to the library";
     }
 
@@ -34,7 +34,7 @@ public class BibliotecaApp {
         List<Book> bookList=library.getAvailableBooks();
         String result=" ";
         for(Book b:bookList){
-            result+= b.getTitle()+"    |"+b.getAuthor()+"   |"+b.getYear()+"\n";
+            result+= b.getTitle()+"                                                  |"+b.getAuthor()+"                |"+b.getYear()+"\n";
         }
         return result;
     }
@@ -63,11 +63,12 @@ public class BibliotecaApp {
 
     public String borrowedBooks() {
         String result=" ";
-        for(Book b:library.getBooks()){
+        for(Book b:library.getBorrowedBooks()){
             if(b.isCheckedOut()==true){
-                result+= b.getTitle()+"    |"+b.getAuthor()+"   |"+b.getYear()+"\n";
+                result+= b.getTitle()+"                                                  |"+b.getAuthor()+"                |"+b.getYear()+"\n";
             }
         }
+
         return result;
     }
 }
