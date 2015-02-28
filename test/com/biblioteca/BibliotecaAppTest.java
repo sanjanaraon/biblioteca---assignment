@@ -51,7 +51,7 @@ public class BibliotecaAppTest {
         String result = " ";
         for (Book b : books) {
             if (b.isCheckedOut() == false)
-                result+= b.getTitle()+"                           |"+b.getAuthor()+"        |"+b.getYear()+"\n";
+                result+= b.getTitle()+"                                                  |"+b.getAuthor()+"                |"+b.getYear()+"\n";
         }
         return result;
     }
@@ -116,7 +116,7 @@ public class BibliotecaAppTest {
     @Test
     public void shouldDisplayListOfBorrowedBooks() throws Exception {
         Book book1 = new Book("S C J P", "Kathy Serra", 2006);
-        String expected = " "+book1.getTitle()+"                           |"+book1.getAuthor()+"        |"+book1.getYear()+"\n";
+        String expected = " "+book1.getTitle()+"                                                  |"+book1.getAuthor()+"                |"+book1.getYear()+"\n";
         bibliotecaApp.checkOutFromLibrary(book1);
         assertEquals(expected, bibliotecaApp.borrowedBooks());
     }
