@@ -75,10 +75,12 @@ public class ConsoleAppTest {
         verify(app).acceptInput();
         verify(app).actionForChoice1();
     }
-
-    @Test
-    public void checkControlFlow() throws Exception {
-       // app.actionForChoice1();
-
-    }
+//
+//    @Test
+//    public void checkControlFlow() throws Exception {
+//     //   app=mock(ConsoleApp.class);
+//        String excepted=testReaderWriter.consoleInput("S C j p");
+//        String title=testReaderWriter.readValue();
+//        assertEquals(4,app.actionForChoice1());
+//    }
 }
