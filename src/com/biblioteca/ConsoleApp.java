@@ -3,12 +3,12 @@ package com.biblioteca;
 import java.io.IOException;
 
 /**
- * Created by sanjanar on 26/02/15.
- */
+* Created by sanjanar on 26/02/15.
+*/
 public class ConsoleApp {
 
     private InputOutput inputOutput;
-    private BibliotecaApp app = new BibliotecaApp();
+    BibliotecaApp app = new BibliotecaApp();
 
     public ConsoleApp(InputOutput inputOutput) {
         this.inputOutput = inputOutput;
@@ -40,23 +40,22 @@ public class ConsoleApp {
     }
 
     public void actionForChoice1() throws IOException {
-        int counter=0;
-        printMessage("Books available for borrowing");
-        counter++;
-        printMessage(app.displayBookDetails());
-        counter++;
+        displayBookDetails();
         if (count > 0) {
             printMessage("Books that have to be returned");
             printMessage(app.borrowedBooks());
         }
         printMessage("Select a book by entering the title");
-        counter++;
         String title = acceptInput();
-        if (validTitle(title)) {
+        if (app.validTitle(title)) {
             subMenu(title);
         } else
             printMessage("There seems to be a mistake in book title entered \n OR The book may not exist");
-        counter++;
+    }
+
+    public void displayBookDetails() throws IOException {
+        printMessage("Books available for borrowing");
+        printMessage(app.displayBookDetails());
     }
 
     public void printMessage(String message) throws IOException {
@@ -68,13 +67,6 @@ public class ConsoleApp {
         return inputOutput.readValue();
     }
 
-    public boolean validTitle(String title) {
-        Book book = app.getBook(title);
-        if (book != null) {
-            return true;
-        }
-        return false;
-    }
 
     private void subMenu(String title) throws IOException {
         Book book = app.getBook(title);
