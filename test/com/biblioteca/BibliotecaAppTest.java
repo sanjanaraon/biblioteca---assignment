@@ -6,9 +6,7 @@ import org.junit.Test;
 import java.util.List;
 
 import static org.hamcrest.core.IsCollectionContaining.hasItem;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.mock;
 
@@ -51,7 +49,7 @@ public class BibliotecaAppTest {
         String result = " ";
         for (Book b : books) {
             if (b.isCheckedOut() == false)
-                result+= b.getTitle()+"                                                  |"+b.getAuthor()+"                |"+b.getYear()+"\n";
+                result+= b.getTitle()+"                          |"+b.getAuthor()+"                |"+b.getYear()+"\n";
         }
         return result;
     }
@@ -116,8 +114,19 @@ public class BibliotecaAppTest {
     @Test
     public void shouldDisplayListOfBorrowedBooks() throws Exception {
         Book book1 = new Book("S C J P", "Kathy Serra", 2006);
-        String expected = " "+book1.getTitle()+"                                                  |"+book1.getAuthor()+"                |"+book1.getYear()+"\n";
+        String expected = " "+book1.getTitle()+"                       |"+book1.getAuthor()+"                |"+book1.getYear()+"\n";
         bibliotecaApp.checkOutFromLibrary(book1);
         assertEquals(expected, bibliotecaApp.borrowedBooks());
     }
+
+    @Test
+    public void shouldReturnTrueWhenAValidBookIsPassed() throws Exception {
+        assertTrue(bibliotecaApp.validTitle("s c j p"));
+    }
+
+    @Test
+    public void shouldReturnFalseWhenInvalidBookIsPassed() throws Exception {
+        assertFalse(bibliotecaApp.validTitle("s a c d"));
+    }
+
 }
