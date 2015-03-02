@@ -21,17 +21,21 @@ public class Library {
         return books;
     }
 
-    public void checkOut(Book book) throws InvalidBookException {
-        if (books.contains(book) && book.isCheckedOut() == false)
+    public boolean checkOut(Book book) throws InvalidBookException {
+        if (books.contains(book) && book.isCheckedOut() == false) {
             resetCheckOut(book, true);
+            return true;
+        }
         else
             throw new InvalidBookException();
 
     }
 
-    public void returnBook(Book book) throws InvalidBookException {
-        if (books.contains(book) && book.isCheckedOut() == true)
+    public boolean returnBook(Book book) throws InvalidBookException {
+        if (books.contains(book) && book.isCheckedOut() == true){
             resetCheckOut(book, false);
+        return true;
+        }
         else
             throw new InvalidBookException();
     }

@@ -21,14 +21,6 @@ public class Book {
         return title;
     }
 
-    public String getAuthor() {
-        return author;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
     public void setCheckedOut(boolean checkedOut) {
         this.checkedOut = checkedOut;
     }
@@ -43,8 +35,7 @@ public class Book {
                 "title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", year=" + year +
-                ", checkedOut=" + checkedOut +
-                '}';
+                "}\n";
     }
 
     @Override

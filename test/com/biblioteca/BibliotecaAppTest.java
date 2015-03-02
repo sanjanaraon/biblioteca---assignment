@@ -28,7 +28,12 @@ public class BibliotecaAppTest {
 
     @Test
     public void shouldDisplayMainMenu() throws Exception {
-        String expected = "Main menu \n 1 ---- Book Details \n 2 ---- Exit\nEnter your choice";
+        String expected = "Main menu \n" +
+                " 1 ---- Book Details \n" +
+                " 2 ---- Check Out a book\n" +
+                " 3 ---- Return a book\n" +
+                " 4 ---- Exit\n"+
+                "Enter your choice";
         assertEquals(expected, bibliotecaApp.displayMainMenu());
     }
 
@@ -36,30 +41,23 @@ public class BibliotecaAppTest {
     public void shouldHaveAListOfBooksWhenTheAppIsInitialized() throws Exception {
         Library library = new Library();
         List<Book> expectedBooks = library.initializeBookList();
-        assertEquals(expectedBooks, bibliotecaApp.getBooks());
+        assertEquals(expectedBooks, bibliotecaApp.getBooksList());
     }
 
     @Test
     public void shouldDisplayTheListOfBooksInTableForm() throws Exception {
-        String expected = bookListInTable(bibliotecaApp.getBooks());
+        String expected = bibliotecaApp.getBooks();
         assertEquals(expected, bibliotecaApp.displayBookDetails());
     }
 
-    private String bookListInTable(List<Book> books) {
-        String result = " ";
-        for (Book b : books) {
-            if (b.isCheckedOut() == false)
-                result+= b.getTitle()+"                          |"+b.getAuthor()+"                |"+b.getYear()+"\n";
-        }
-        return result;
-    }
+
 
     @Test
     public void shouldCheckoutABook() throws Exception {
         Book book1 = new Book("S C J P", "Kathy Serra", 2006);
         Library mockLibrary = mock(Library.class);
 
-        doNothing().when(mockLibrary).checkOut(book1);
+       when(mockLibrary.checkOut(book1)).thenReturn(true);
 
         bibliotecaApp = new BibliotecaApp(mockLibrary);
         bibliotecaApp.checkOutFromLibrary(book1);
@@ -85,10 +83,10 @@ public class BibliotecaAppTest {
         Book book1 = new Book("S C J P", "Kathy Serra", 2006);
         Library mockLibrary = mock(Library.class);
 
-        doNothing().when(mockLibrary).returnBook(book1);
+        when(mockLibrary.returnBook(book1)).thenReturn(true);
 
         bibliotecaApp = new BibliotecaApp(mockLibrary);
-        bibliotecaApp.returnBookFromLibrary(book1);
+        bibliotecaApp.returnBookToLibrary(book1);
 
         verify(mockLibrary).returnBook(book1);
     }
@@ -101,7 +99,7 @@ public class BibliotecaAppTest {
         doThrow(new InvalidBookException()).when(mocklibrary).returnBook(book1);
 
         bibliotecaApp=new BibliotecaApp(mocklibrary);
-        bibliotecaApp.returnBookFromLibrary(book1);
+        bibliotecaApp.returnBookToLibrary(book1);
 
         verify(mocklibrary).returnBook(book1);
     }
@@ -114,9 +112,8 @@ public class BibliotecaAppTest {
     @Test
     public void shouldDisplayListOfBorrowedBooks() throws Exception {
         Book book1 = new Book("S C J P", "Kathy Serra", 2006);
-        String expected = " "+book1.getTitle()+"                       |"+book1.getAuthor()+"                |"+book1.getYear()+"\n";
         bibliotecaApp.checkOutFromLibrary(book1);
-        assertEquals(expected, bibliotecaApp.borrowedBooks());
+        assertEquals(book1.toString(), bibliotecaApp.borrowedBooks());
     }
 
     @Test

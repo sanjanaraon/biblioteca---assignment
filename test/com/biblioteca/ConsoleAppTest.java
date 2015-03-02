@@ -3,8 +3,6 @@ package com.biblioteca;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.List;
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
@@ -17,72 +15,121 @@ import static org.mockito.Mockito.*;
  */
 public class ConsoleAppTest {
     TestReaderWriter testReaderWriter;
-    ConsoleApp app;
+    ConsoleApp consoleApp;
     BibliotecaApp bibliotecaApp;
 
 
     @Before
-    public void setUp(){
+    public void setUp() {
         testReaderWriter = new TestReaderWriter();
-        app = new ConsoleApp(testReaderWriter);
+        consoleApp = new ConsoleApp(testReaderWriter);
         bibliotecaApp = new BibliotecaApp();
 
     }
 
     @Test
     public void shouldDisplayWelcomeMessage() throws Exception {
-        app.printMessage(bibliotecaApp.displayWelcomeMessage());
+        consoleApp.printMessage(bibliotecaApp.displayWelcomeMessage());
         String expectedString = "Welcome to Biblioteca \n" +
                 " The app to borrow and return the books to the library";
-        assertThat(testReaderWriter.consoleOutput(), is(expectedString));
+        assertEquals(expectedString, testReaderWriter.consoleOutput());
     }
 
     @Test
     public void shouldDisplayMainMenu() throws Exception {
-        app.printMessage(bibliotecaApp.displayMainMenu());
-        String expectedString="Main menu \n" +
+        consoleApp.printMessage(bibliotecaApp.displayMainMenu());
+        String expectedString = "Main menu \n" +
                 " 1 ---- Book Details \n" +
-                " 2 ---- Exit\n" +
+                " 2 ---- Check Out a book\n" +
+                " 3 ---- Return a book\n" +
+                " 4 ---- Exit\n" +
                 "Enter your choice";
-        assertEquals(expectedString,testReaderWriter.consoleOutput());
+        assertEquals(expectedString, testReaderWriter.consoleOutput());
     }
 
     @Test
     public void shouldAcceptUsersChoice() throws Exception {
-        String  excepted= testReaderWriter.consoleInput("1");
-        String choice= app.acceptInput();
-        assertEquals(excepted, choice);
+        testReaderWriter.consoleInput("12");
+        String choice = consoleApp.acceptInput();
+        assertEquals("12", choice);
     }
 
 
     @Test
-    public void shouldDoActionRelatedToChoiceOf1stOptionWhenSelected() throws Exception {
-        app=mock(ConsoleApp.class);
-        when(app.acceptInput()).thenReturn(String.valueOf(1));
-        doNothing().when(app).actionForChoice1();
-        int choice= Integer.parseInt(app.acceptInput());
-        if(choice==1){
-            app.actionForChoice1();
-        }
+    public void checkFirstMessagePrintedIsWelcomeMessage() throws Exception {
+        consoleApp.firstMessage();
+        BibliotecaApp mockBiblioteca = mock(BibliotecaApp.class);
+        String excepted = "Welcome to Biblioteca \n" +
+                " The app to borrow and return the books to the library";
+        when(mockBiblioteca.displayWelcomeMessage()).thenReturn("Welcome to Biblioteca \n" +
+                " The app to borrow and return the books to the library");
 
-        verify(app).acceptInput();
-        verify(app).actionForChoice1();
+        assertEquals(excepted, testReaderWriter.consoleOutput());
+
     }
 
     @Test
-    public void shouldDisplayBookDetailWhenChoice1IsSelected() throws Exception {
-        app.displayBookDetails();
-        String expectedString=bookListInTable(bibliotecaApp.getBooks());
-        assertEquals(expectedString, testReaderWriter.consoleOutput());
+    public void shouldCallDisplayDetailsWhen1IsPassed() throws Exception {
+        bibliotecaApp = mock(BibliotecaApp.class);
+
+        consoleApp=new ConsoleApp(testReaderWriter,bibliotecaApp);
+        when(bibliotecaApp.displayWelcomeMessage()).thenReturn("welcome");
+        when(bibliotecaApp.displayBookDetails()).thenReturn("Book Details");
+       // when(bibliotecaApp.displayBookDetails()).thenReturn("Books");
+        testReaderWriter.consoleInput("1\n4");
+        String expected = "welcomenullBooks available for borrowingBook DetailsnullSuccessful Exit";
+        consoleApp.mainMenu();
+        assertEquals(expected, testReaderWriter.consoleOutput());
 
     }
 
-    private String bookListInTable(List<Book> books) {
-        String result = " ";
-        for (Book b : books) {
-            if (b.isCheckedOut() == false)
-                result+= b.getTitle()+"                          |"+b.getAuthor()+"                |"+b.getYear()+"\n";
-        }
-        return result;
+    @Test
+    public void shouldCallCheckOutBookMenuActionWhen2IsPassed() throws Exception {
+        bibliotecaApp = mock(BibliotecaApp.class);
+        consoleApp=new ConsoleApp(testReaderWriter,bibliotecaApp);
+
+        when(bibliotecaApp.getBooks()).thenReturn("Book Details");
+        when(bibliotecaApp.validTitle("s c j p")).thenReturn(true);
+        when(bibliotecaApp.displayWelcomeMessage()).thenReturn("welcome");
+        testReaderWriter.consoleInput("2\nS C J P\n4");
+
+        String expected = "welcomenullBook DetailsSelect a book by entering the titleThere seems to be a mistake in the title nullSuccessful Exit";
+
+        consoleApp.mainMenu();
+
+        assertEquals(expected,testReaderWriter.consoleOutput());
+
+    }
+
+    @Test
+    public void shouldCallReturnBookMenuActionWhen3IsPassed() throws Exception {
+        bibliotecaApp = mock(BibliotecaApp.class);
+        consoleApp=new ConsoleApp(testReaderWriter,bibliotecaApp);
+
+        when(bibliotecaApp.displayWelcomeMessage()).thenReturn("welcome");
+        when(bibliotecaApp.displayMainMenu()).thenReturn("main menu");
+        when(bibliotecaApp.borrowedBooks()).thenReturn("Book Details");
+        Book book1 = new Book("S C J P", "Kathy Serra", 2006);
+        when(bibliotecaApp.getBook("s c j p")).thenReturn(book1);
+
+        when(bibliotecaApp.returnBookToLibrary(book1)).thenReturn(true);
+        testReaderWriter.consoleInput("3\nS C J P\n4");
+        String expected = "welcomemain menuBook DetailsSelect a book by entering the titlemain menuSuccessful Exit";
+        consoleApp.mainMenu();
+        assertEquals(expected,testReaderWriter.consoleOutput());
+
+    }
+
+    @Test
+    public void shouldReturnWhen4IsPassed() throws Exception {
+        testReaderWriter.consoleInput("4");
+        consoleApp.mainMenu();
+        assertEquals("Welcome to Biblioteca \n" +
+                " The app to borrow and return the books to the libraryMain menu \n" +
+                " 1 ---- Book Details \n" +
+                " 2 ---- Check Out a book\n" +
+                " 3 ---- Return a book\n" +
+                " 4 ---- Exit\n" +
+                "Enter your choiceSuccessful Exit",testReaderWriter.consoleOutput());
     }
 }
