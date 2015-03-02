@@ -34,7 +34,7 @@ public class BibliotecaApp {
         List<Book> bookList=library.getAvailableBooks();
         String result=" ";
         for(Book b:bookList){
-            result+= b.getTitle()+"                                                  |"+b.getAuthor()+"                |"+b.getYear()+"\n";
+            result+= b.getTitle()+"                          |"+b.getAuthor()+"                |"+b.getYear()+"\n";
         }
         return result;
     }
@@ -65,10 +65,18 @@ public class BibliotecaApp {
         String result=" ";
         for(Book b:library.getBorrowedBooks()){
             if(b.isCheckedOut()==true){
-                result+= b.getTitle()+"                                                  |"+b.getAuthor()+"                |"+b.getYear()+"\n";
+                result+= b.getTitle()+"                       |"+b.getAuthor()+"                |"+b.getYear()+"\n";
             }
         }
 
         return result;
+    }
+
+    public boolean validTitle(String title) {
+        Book book = getBook(title);
+        if (book != null) {
+            return true;
+        }
+        return false;
     }
 }
