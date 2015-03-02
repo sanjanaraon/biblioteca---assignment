@@ -5,6 +5,6 @@ package com.biblioteca;
  */
 public class InvalidBookException extends Exception {
     public InvalidBookException() {
-        super("The Book is not available or It is not a Valid Book");
+        super("The Book is not available to be checked out OR It is not a Valid Book to be returned");
     }
 }
