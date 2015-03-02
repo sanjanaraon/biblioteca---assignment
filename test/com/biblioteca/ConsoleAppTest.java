@@ -3,6 +3,8 @@ package com.biblioteca;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
@@ -42,7 +44,7 @@ public class ConsoleAppTest {
                 " 1 ---- Book Details \n" +
                 " 2 ---- Exit\n" +
                 "Enter your choice";
-        assertEquals(testReaderWriter.consoleOutput(),expectedString);
+        assertEquals(expectedString,testReaderWriter.consoleOutput());
     }
 
     @Test
@@ -52,15 +54,6 @@ public class ConsoleAppTest {
         assertEquals(excepted, choice);
     }
 
-    @Test
-    public void shouldReturnTrueWhenAValidBookIsPassed() throws Exception {
-        assertTrue(app.validTitle("s c j p"));
-    }
-
-    @Test
-    public void shouldReturnFalseWhenInvalidBookIsPassed() throws Exception {
-        assertFalse(app.validTitle("s a c d"));
-    }
 
     @Test
     public void shouldDoActionRelatedToChoiceOf1stOptionWhenSelected() throws Exception {
@@ -75,12 +68,21 @@ public class ConsoleAppTest {
         verify(app).acceptInput();
         verify(app).actionForChoice1();
     }
-//
-//    @Test
-//    public void checkControlFlow() throws Exception {
-//     //   app=mock(ConsoleApp.class);
-//        String excepted=testReaderWriter.consoleInput("S C j p");
-//        String title=testReaderWriter.readValue();
-//        assertEquals(4,app.actionForChoice1());
-//    }
+
+    @Test
+    public void shouldDisplayBookDetailWhenChoice1IsSelected() throws Exception {
+        app.displayBookDetails();
+        String expectedString=bookListInTable(bibliotecaApp.getBooks());
+        assertEquals(expectedString, testReaderWriter.consoleOutput());
+
+    }
+
+    private String bookListInTable(List<Book> books) {
+        String result = " ";
+        for (Book b : books) {
+            if (b.isCheckedOut() == false)
+                result+= b.getTitle()+"                          |"+b.getAuthor()+"                |"+b.getYear()+"\n";
+        }
+        return result;
+    }
 }
