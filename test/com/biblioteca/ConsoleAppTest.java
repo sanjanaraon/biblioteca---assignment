@@ -73,11 +73,12 @@ public class ConsoleAppTest {
         bibliotecaApp = mock(BibliotecaApp.class);
 
         consoleApp=new ConsoleApp(testReaderWriter,bibliotecaApp);
-        when(bibliotecaApp.displayWelcomeMessage()).thenReturn("welcome");
-        when(bibliotecaApp.displayBookDetails()).thenReturn("Book Details");
+        when(bibliotecaApp.displayWelcomeMessage()).thenReturn("welcome ");
+        when(bibliotecaApp.displayMainMenu()).thenReturn("Main menu ");
+        when(bibliotecaApp.displayBookDetails()).thenReturn("Book Details ");
        // when(bibliotecaApp.displayBookDetails()).thenReturn("Books");
         testReaderWriter.consoleInput("1\n4");
-        String expected = "welcomenullBooks available for borrowingBook DetailsnullSuccessful Exit";
+        String expected = "welcome Main menu Books available for borrowingBook Details Main menu Successful Exit";
         consoleApp.mainMenu();
         assertEquals(expected, testReaderWriter.consoleOutput());
 
@@ -88,12 +89,14 @@ public class ConsoleAppTest {
         bibliotecaApp = mock(BibliotecaApp.class);
         consoleApp=new ConsoleApp(testReaderWriter,bibliotecaApp);
 
-        when(bibliotecaApp.getBooks()).thenReturn("Book Details");
-        when(bibliotecaApp.validTitle("s c j p")).thenReturn(true);
-        when(bibliotecaApp.displayWelcomeMessage()).thenReturn("welcome");
+        when(bibliotecaApp.displayWelcomeMessage()).thenReturn("welcome ");
+        when(bibliotecaApp.displayMainMenu()).thenReturn("Main menu ");
+
+        when(bibliotecaApp.getBooks()).thenReturn("Book Details ");
+        when(bibliotecaApp.validTitle("S C J P")).thenReturn(true);
         testReaderWriter.consoleInput("2\nS C J P\n4");
 
-        String expected = "welcomenullBook DetailsSelect a book by entering the titleThere seems to be a mistake in the title nullSuccessful Exit";
+        String expected = "welcome Main menu Book Details Select a book by entering the titleMain menu Successful Exit";
 
         consoleApp.mainMenu();
 
