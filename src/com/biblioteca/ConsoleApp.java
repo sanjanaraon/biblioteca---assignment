@@ -25,7 +25,6 @@ public class ConsoleApp {
 
     public void mainMenu() throws IOException {
         firstMessage();
-
         while (true) {
             SubMenu subMenu=new SubMenu(inputOutput);
             printMessage("Which library you want to use book(0)/movie(1)/Exit(2)\n Enter 0/1/2??");
@@ -35,7 +34,7 @@ public class ConsoleApp {
                     }else if(number==1){
                        subMenu.menu(app.getItemListByCategory("movie"), app, inputOutput);
                     }else if(number==2){
-                       System.exit(0);
+                       return;
                     }else{
                         printMessage("enter either 0 or 1 or 2");
                     }
