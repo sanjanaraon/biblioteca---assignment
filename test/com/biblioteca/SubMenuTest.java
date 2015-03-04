@@ -33,7 +33,7 @@ public class SubMenuTest {
         List<Item> list=bookBibliotecaApp.getItemListByCategory("book");
         subMenu =new SubMenu(testReaderWriter,bookBibliotecaApp);
         when(bookBibliotecaApp.displayMainMenu()).thenReturn("Main menu ");
-        when(bookBibliotecaApp.displaySpecificItemListDetails(list)).thenReturn("Book Details ");
+        when(bookBibliotecaApp.displayItemDetails(list)).thenReturn("Book Details ");
         testReaderWriter.consoleInput("1\n4");
         String expected = "Main menu Items available for borrowingBook Details Main menu Successful Exit";
        subMenu.menu(list, bookBibliotecaApp, testReaderWriter);
@@ -74,7 +74,7 @@ public class SubMenuTest {
 
         when(bookBibliotecaApp.returnBookToLibrary(book1)).thenReturn(true);
         testReaderWriter.consoleInput("3\nS C J P\n4");
-        String expected = "main menuBook DetailsSelect a book by entering the titlemain menuSuccessful Exit";
+        String expected = "main menuBook DetailsSelect a Item by entering the titlemain menuSuccessful Exit";
         subMenu.menu(list,bookBibliotecaApp,testReaderWriter);
         assertEquals(expected,testReaderWriter.consoleOutput());
 

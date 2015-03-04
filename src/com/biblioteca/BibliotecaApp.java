@@ -55,11 +55,14 @@ public class BibliotecaApp {
                 "Enter your choice";
     }
 
-    public String displayItemDetails() {
-        List<Item> itemList=library.getAvailableItems();
+    public String displayItemDetails(List<? extends Item> list) {
         String result="";
-        for(Item b:itemList){
-            result+=b+"\n";
+        List<Item> itemList=library.getAvailableItems();
+        for(Item availableItemList:itemList){
+            for(Item specificItemList:list){
+                if(availableItemList==specificItemList)
+                    result+=specificItemList+"\n";
+            }
         }
         return result;
     }
@@ -135,8 +138,8 @@ public class BibliotecaApp {
 
     public String displaySpecificItemListDetails(List<? extends Item> list) {
         String result="";
-        for(Item i:list){
-            result+=i+"\n";
+        for(Item specificItemList:list){
+            result+=specificItemList+"\n";
         }
         return result;
     }

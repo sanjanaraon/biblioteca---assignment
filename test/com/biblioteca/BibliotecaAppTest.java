@@ -74,17 +74,6 @@ public class BibliotecaAppTest {
         assertEquals(expectedBooks, movieBibliotecaApp.getItemList());
     }
 
-    @Test
-    public void shouldDisplayTheListOfBooksInTableForm() throws Exception {
-        String expected = bookBibliotecaApp.getItems();
-        assertEquals(expected, bookBibliotecaApp.displayItemDetails());
-    }
-
-    @Test
-    public void shouldDisplayTheListOfMoviesInTableForm() throws Exception {
-        String expected = movieBibliotecaApp.getItems();
-        assertEquals(expected, movieBibliotecaApp.displayItemDetails());
-    }
 
     @Test
     public void shouldCheckoutABook() throws Exception {

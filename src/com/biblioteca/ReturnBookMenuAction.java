@@ -34,7 +34,7 @@ public class ReturnBookMenuAction implements MenuAction{
     @Override
     public void actionPerformed(BibliotecaApp bibliotecaApp, InputOutput readerWriter, List<? extends Item> list) throws IOException, InvalidItemException {
         printMessage(bibliotecaApp.borrowedItems(), readerWriter);
-        printMessage("Select a book by entering the title",readerWriter);
+        printMessage("Select a Item by entering the title",readerWriter);
         String title;
         title = acceptInput(readerWriter);
         Item book = bibliotecaApp.getItem(title);

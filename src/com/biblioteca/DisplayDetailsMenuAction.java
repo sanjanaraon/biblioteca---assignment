@@ -15,7 +15,7 @@ public class DisplayDetailsMenuAction implements MenuAction {
     @Override
     public void actionPerformed(BibliotecaApp bibliotecaApp, InputOutput readerWriter, List<? extends Item> list) throws IOException, InvalidItemException {
         printMessage("Items available for borrowing",readerWriter);
-        printMessage(bibliotecaApp.displaySpecificItemListDetails(list),readerWriter);
+        printMessage(bibliotecaApp.displayItemDetails(list),readerWriter);
     }
 
     public void printMessage(String message, InputOutput readerWriter) throws IOException {
