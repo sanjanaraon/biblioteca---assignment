@@ -91,15 +91,6 @@ public class Library {
         return availableBook;
     }
 
-//    public List<Item> getBorrowedItems() {
-//        List<Item> borrowedItems=new ArrayList<Item>();
-//        for(Item item:itemList){
-//            if(item.isCheckedOut()==true){
-//                borrowedItems.add(item);
-//            }
-//        }
-//        return borrowedItems;
-//    }
 
     public Item getItem(String title) {
         for(Item item:itemList){
