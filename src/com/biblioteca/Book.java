@@ -3,26 +3,51 @@ package com.biblioteca;
 /**
  * Created by sanjanar on 25/02/15.
  */
-public class Book {
+public class Book implements Item{
     private String title;
     private String author;
     private int year;
     private boolean checkedOut;
+    private String category;
 
     public Book(String title, String author, int year) {
         this.title = title;
         this.author = author;
         this.year = year;
         this.checkedOut=false;
+        this.category="book";
     }
 
+    @Override
+    public String getCategory() {
+        return category;
+    }
 
     public String getTitle() {
         return title;
     }
 
-    public void setCheckedOut(boolean checkedOut) {
-        this.checkedOut = checkedOut;
+    @Override
+    public int getYear() {
+        return year;
+    }
+
+    @Override
+    public String getDirector() {
+        return null;
+    }
+
+    @Override
+    public String getRating() {
+        return null;
+    }
+
+    @Override
+    public String getAuthor(){
+        return author;
+    }
+    public void setCheckedOut(boolean flag) {
+        this.checkedOut = flag;
     }
 
     public boolean isCheckedOut() {
@@ -35,15 +60,16 @@ public class Book {
                 "title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", year=" + year +
-                "}\n";
+                "}";
     }
 
     @Override
     public boolean equals(Object newBook) {
-        Book book=(Book)newBook;
-        if(this.title==book.title && this.author==book.author && this.year==book.year){
+        Item book=(Item)newBook;
+        if(this.title==book.getTitle() && this.author==book.getAuthor() && this.year==book.getYear()){
             return true;
         }
         return false;
     }
+
 }

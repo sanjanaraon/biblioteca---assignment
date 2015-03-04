@@ -7,78 +7,107 @@ import java.util.List;
  * Created by sanjanar on 25/02/15.
  */
 public class Library {
-    List<Book> books = new ArrayList<Book>();
+    List<Item> itemList=new ArrayList<Item>();
 
     public Library() {
-
+        rentInitializer();
     }
 
-    public void addBook(Book book) {
-        books.add(book);
+    private void rentInitializer() {
+        initializeBookList();
+        initializeMovieList();
     }
 
-    public List<Book> getBooks() {
-        return books;
+
+    public void addItem(Item item) {
+        itemList.add(item);
     }
 
-    public boolean checkOut(Book book) throws InvalidBookException {
-        if (books.contains(book) && book.isCheckedOut() == false) {
-            resetCheckOut(book, true);
+    public List<Item> getItems() {
+        return itemList;
+    }
+
+    public boolean checkOutItem(Item item) throws InvalidItemException {
+        if (itemList.contains(item) && item.isCheckedOut() == false) {
+            resetCheckOut(item, true);
             return true;
         }
         else
-            throw new InvalidBookException();
+            throw new InvalidItemException();
 
     }
 
-    public boolean returnBook(Book book) throws InvalidBookException {
-        if (books.contains(book) && book.isCheckedOut() == true){
-            resetCheckOut(book, false);
+    public boolean returnItem(Item item) throws InvalidItemException {
+        if (itemList.contains(item) && item.isCheckedOut() == true){
+            resetCheckOut(item, false);
         return true;
         }
         else
-            throw new InvalidBookException();
+            throw new InvalidItemException();
     }
 
-    private void resetCheckOut(Book book, boolean flag) {
-        for (Book b : books) {
-            if (b.equals(book)) {
-                b.setCheckedOut(flag);
+    private void resetCheckOut(Item item, boolean flag) {
+        for (Item i : itemList) {
+            if (i.equals(item)) {
+                i.setCheckedOut(flag);
                 break;
             }
         }
     }
 
-    public List<Book> initializeBookList() {
+    public List<Item> initializeBookList() {
         Book book1 = new Book("S C J P", "Kathy Serra", 2006);
-        addBook(book1);
+        itemList.add(book1);
         Book book2 = new Book("Let us C", "Yeshwanth", 2000);
-        addBook(book2);
+        itemList.add(book2);
         Book book3 = new Book("The art of computer programming", "Donald ", 1968);
-       addBook(book3);
+        itemList.add(book3);
         Book book4 = new Book("Learning Python", "Mark Lutz", 1999);
-        addBook(book4);
-        return books;
+        itemList.add(book4);
+        return itemList;
+
     }
 
 
-    public List<Book> getAvailableBooks() {
-        List<Book> availableBook=new ArrayList<Book>();
-        for(Book b:books){
-            if(b.isCheckedOut()==false){
-                availableBook.add(b);
+    public List<Item> initializeMovieList(){
+        Movie movie1 = new Movie("Star wars",1977,"George Lucas","9");
+        itemList.add(movie1);
+        Movie movie2 = new Movie("The Terminator",1984,"James Cameron","8");
+        itemList.add(movie2);
+        Movie movie3=new Movie("Frozen",2013,"Jeniffer Lee","7");
+        itemList.add(movie3);
+        Movie movie4=new Movie("Brave",2012,"Mark Andrews","unrated");
+        itemList.add(movie4);
+        return itemList;
+    }
+
+    public List<Item> getAvailableItems() {
+        List<Item> availableBook=new ArrayList<Item>();
+        for(Item item:itemList){
+            if(item.isCheckedOut()==false){
+                availableBook.add(item);
             }
         }
         return availableBook;
     }
 
-    public List<Book> getBorrowedBooks() {
-        List<Book> borrowedBooks=new ArrayList<Book>();
-        for(Book b:books){
-            if(b.isCheckedOut()==true){
-                borrowedBooks.add(b);
-            }
+//    public List<Item> getBorrowedItems() {
+//        List<Item> borrowedItems=new ArrayList<Item>();
+//        for(Item item:itemList){
+//            if(item.isCheckedOut()==true){
+//                borrowedItems.add(item);
+//            }
+//        }
+//        return borrowedItems;
+//    }
+
+    public Item getItem(String title) {
+        for(Item item:itemList){
+        if(item.getTitle().equalsIgnoreCase(title)){
+            return item;
         }
-        return borrowedBooks;
+        }
+        return null;
     }
+
 }
