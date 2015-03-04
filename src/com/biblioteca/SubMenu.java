@@ -34,7 +34,7 @@ public class SubMenu {
         };
     }
 
-    public int menu(List<? extends Item> list, BibliotecaApp app, InputOutput inputOutput) throws IOException {
+    public int menu(List<? extends Item> list, BibliotecaApp app, InputOutput inputOutput, AccountManager manager) throws IOException {
         int choice=0;
         do {
             List<? extends Item> items=list;
@@ -48,7 +48,7 @@ public class SubMenu {
             if (choice >= 1 && choice <= 4) {
 
                 try {
-                    menuMap[choice-1].actionPerformed(app, inputOutput,items);
+                    menuMap[choice-1].actionPerformed(app, inputOutput,items,manager);
                 } catch (IOException e) {
                     System.out.println(e);
                 } catch (InvalidItemException e) {

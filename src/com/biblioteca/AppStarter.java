@@ -10,6 +10,5 @@ public class AppStarter {
         ConsoleReaderWriter consoleReaderWriter = new ConsoleReaderWriter();
         ConsoleApp app = new ConsoleApp(consoleReaderWriter);
         app.mainMenu();
-
     }
 }

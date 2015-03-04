@@ -22,6 +22,7 @@ public class ConsoleApp {
         this.inputOutput = inputOutput;
         this.app = mockBiblioteca;
     }
+    AccountManager manager = new AccountManager();
 
     public void mainMenu() throws IOException {
         firstMessage();
@@ -30,9 +31,9 @@ public class ConsoleApp {
             printMessage("Which library you want to use book(0)/movie(1)/Exit(2)\n Enter 0/1/2??");
                     int number= Integer.parseInt(acceptInput());
                     if(number==0){
-                        subMenu.menu(app.getItemListByCategory("book"),app,inputOutput);
+                        subMenu.menu(app.getItemListByCategory("book"),app,inputOutput,manager);
                     }else if(number==1){
-                       subMenu.menu(app.getItemListByCategory("movie"), app, inputOutput);
+                       subMenu.menu(app.getItemListByCategory("movie"), app, inputOutput, manager);
                     }else if(number==2){
                        return;
                     }else{

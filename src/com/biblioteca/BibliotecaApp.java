@@ -113,7 +113,6 @@ public class BibliotecaApp {
                 result+=item;
             }
         }
-
         return result;
     }
 

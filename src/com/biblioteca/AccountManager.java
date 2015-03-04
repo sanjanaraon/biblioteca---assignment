@@ -6,9 +6,11 @@ import java.util.List;
 /**
  * Created by sanjanar on 04/03/15.
  */
-public class LoggerHelper {
+public class AccountManager {
     List<UserInfo> users=new ArrayList<UserInfo>();
-    public LoggerHelper() {
+    String number;
+    String password;
+    public AccountManager() {
         this.users = initializeUserDetails();
     }
 
@@ -42,5 +44,16 @@ public class LoggerHelper {
             }
         }
         return null;
+    }
+
+    public boolean checkCredentials(String libraryNumber, String pswd) {
+        List<UserInfo> users= getUserDetails();
+        for(UserInfo user:users){
+            if(user.getLibraryNumber().equals(libraryNumber) && user.getPassword().equals(pswd)){
+                user.setLoggedIn(true);
+                return true;
+            }
+        }
+        return false;
     }
 }

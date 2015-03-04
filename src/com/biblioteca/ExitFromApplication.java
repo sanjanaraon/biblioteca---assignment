@@ -12,7 +12,8 @@ public class ExitFromApplication implements MenuAction {
 //    }
 
     @Override
-    public void actionPerformed(BibliotecaApp bibliotecaApp, InputOutput readerWriter, List<? extends Item> list) throws IOException, InvalidItemException {
+    public void actionPerformed(BibliotecaApp bibliotecaApp, InputOutput readerWriter, List<? extends Item> list,AccountManager manager)
+            throws IOException, InvalidItemException {
         readerWriter.writeValue("Successful Exit");
         return;
 

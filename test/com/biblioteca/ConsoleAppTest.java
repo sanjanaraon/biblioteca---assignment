@@ -84,8 +84,9 @@ public class ConsoleAppTest {
         BibliotecaApp mockBiblioteca = mock(BibliotecaApp.class);
         consoleApp=new ConsoleApp(testReaderWriter,mockBiblioteca);
         when(mockBiblioteca.displayWelcomeMessage()).thenReturn("Welcome to Biblioteca ");
+        when(mockBiblioteca.displayMainMenu()).thenReturn("main menu ");
         String excepted = "Welcome to Biblioteca Which library you want to use book(0)/movie(1)/Exit(2)\n" +
-                " Enter 0/1/2??nullSuccessful ExitWhich library you want to use book(0)/movie(1)/Exit(2)\n" +
+                " Enter 0/1/2??main menu Successful ExitWhich library you want to use book(0)/movie(1)/Exit(2)\n" +
                 " Enter 0/1/2??";
         testReaderWriter.consoleInput("0\n4\n2");
 
