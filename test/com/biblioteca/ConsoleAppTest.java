@@ -79,5 +79,18 @@ public class ConsoleAppTest {
 
     }
 
+    @Test
+    public void testForMainMenu() throws Exception {
+        BibliotecaApp mockBiblioteca = mock(BibliotecaApp.class);
+        consoleApp=new ConsoleApp(testReaderWriter,mockBiblioteca);
+        when(mockBiblioteca.displayWelcomeMessage()).thenReturn("Welcome to Biblioteca ");
+        String excepted = "Welcome to Biblioteca Which library you want to use book(0)/movie(1)/Exit(2)\n" +
+                " Enter 0/1/2??nullSuccessful ExitWhich library you want to use book(0)/movie(1)/Exit(2)\n" +
+                " Enter 0/1/2??";
+        testReaderWriter.consoleInput("0\n4\n2");
 
+        consoleApp.mainMenu();
+
+        assertEquals(excepted, testReaderWriter.consoleOutput());
+    }
 }
