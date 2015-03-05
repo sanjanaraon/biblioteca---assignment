@@ -11,7 +11,7 @@ public class ReturnBookMenuAction implements MenuAction {
 
     @Override
     public void actionPerformed(LibraryManager libraryManager, InputOutput readerWriter, List<? extends Item> list,AccountManager manager)
-            throws IOException, InvalidItemException {
+            throws IOException {
         UserInfo loggedInUser = manager.checkForLoggedInUser();
         if (loggedInUser != null) {
             accessReturnItem(libraryManager, readerWriter,list);
@@ -40,7 +40,7 @@ public class ReturnBookMenuAction implements MenuAction {
                 printMessage(book.getTitle() + " returned to the library", readerWriter);
             }
         } catch (InvalidItemException e) {
-            System.out.println(e);
+            System.out.println("That is a invalid Item");
         }
     }
 

@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -45,16 +46,21 @@ public class SubMenuTest {
 
     @Test
     public void shouldCallCheckOutBookMenuActionWhen2IsPassedWithValidCredentials() throws Exception {
+        Book book = new Book("S C J P", "Kathy Serra", 2006);
+
         bookLibraryManager = mock(LibraryManager.class);
         List<Item> list= bookLibraryManager.getItemListByCategory("book");
+       // Item newBook=bookLibraryManager.getItem("s c j p");
         subMenu =new SubMenu(testReaderWriter, bookLibraryManager);
 
         when(bookLibraryManager.displayMainMenu()).thenReturn("Main menu ");
         when(bookLibraryManager.displaySpecificItemListDetails(list)).thenReturn("Book Details ");
         when(bookLibraryManager.validTitle("S C J P")).thenReturn(true);
+        when(bookLibraryManager.getItem("S C J P")).thenReturn(book);
+        doNothing().when(bookLibraryManager).checkOutFromLibrary(book);
         testReaderWriter.consoleInput("2\nlib-1001\nuser2\nS C J P\n4");
 
-        String expected = "Main menu Enter library numberEnter passwordBook Details Select a Item by entering the titleMain menu Successful Exit";
+        String expected = "Main menu Enter library numberEnter passwordBook Details Select a Item by entering the titleS C J P is checked out successfullyMain menu Successful Exit";
 
         subMenu.menu(list, bookLibraryManager,testReaderWriter, manager);
 
@@ -63,7 +69,7 @@ public class SubMenuTest {
     }
 
     @Test
-    public void shouldCallCheckOutBookMenuActionWhen2IsPassedWithoutVaildCredentials() throws Exception {
+    public void shouldCallCheckOutBookMenuActionWhen2IsPassedWithoutValidCredentials() throws Exception {
         bookLibraryManager = mock(LibraryManager.class);
         List<Item> list= bookLibraryManager.getItemListByCategory("book");
         subMenu =new SubMenu(testReaderWriter, bookLibraryManager);

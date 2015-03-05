@@ -39,7 +39,6 @@ public class ConsoleApp {
         int number;
         firstMessage();
         do {
-            SubMenu subMenu = new SubMenu(inputOutput);
             printMessage("Which library you want to use book(0)/movie(1)/Exit(2)\n Enter 0/1/2??");
             number = Integer.parseInt(acceptInput());
             if (number >= 0 && number <= 2) {

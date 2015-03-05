@@ -7,8 +7,6 @@ import java.util.List;
  * Created by sanjanar on 26/02/15.
  */
 public class LibraryManager {
-//    Library bookLibrary=createLibraryWithBooks();
-//     Library movieLibrary=createLibraryWithMovies();
     Library library;
     public LibraryManager() {
 
@@ -19,16 +17,6 @@ public class LibraryManager {
         this.library=library;
     }
 
-//    public BibliotecaApp(Library library) {
-//        if (type.equalsIgnoreCase("book"))
-//            this.library = createLibraryWithBooks();
-//        else if(type.equalsIgnoreCase("movie"))
-//            this.library=createLibraryWithMovies();
-//        else
-//            throw new InvalidAttributesException("library of specified class cannot be created");
-////        this.bookLibrary = Library.createLibraryWithBooks();
-////        this.movieLibrary= Library.createLibraryWithMovies();
-//    }
 
     public static Library createLibraryWithBooks(){
         Library library=new Library();
@@ -43,7 +31,7 @@ public class LibraryManager {
     }
 
     public String displayWelcomeMessage() {
-        return "Welcome to Biblioteca \n The app to borrow and return the books/movies to the library \n";
+        return "Welcome to Biblioteca \n The libraryManager to borrow and return the books/movies to the library \n";
     }
 
     public String displayMainMenu() {
@@ -73,20 +61,28 @@ public class LibraryManager {
     }
 
 
-//    public String getItems() {
-//        List<Item> itemList=library.getItems();
-//        String result="";
-//        for(Item b:itemList){
-//            result+=b+"\n";
-//        }
-//        return result;
-//    }
-
-    public boolean checkOutFromLibrary(Item item) throws InvalidItemException {
-        if (library.checkOutItem(item)){
-            return true;
+    public String displayListOfBorrowedItems(List<? extends Item> list ){
+        List<Item> itemList=library.getBorrowedItems();
+        List<Item> specificItem = getSpecificItemList(list, itemList);
+        String result="";
+        for(Item b:specificItem){
+            result+=b+"\n";
         }
-        return false;
+        return result;
+    }
+
+    private List<Item> getSpecificItemList(List<? extends Item> list, List<Item> itemList) {
+        List<Item> specificItem=new ArrayList<Item>();
+        for(Item i:itemList){
+            if(list.getClass().equals(i.getClass())){
+                specificItem.add(i);
+            }
+        }
+        return specificItem;
+    }
+
+    public void checkOutFromLibrary(Item item) throws InvalidItemException {
+        library.checkOutItem(item);
     }
 
     public boolean returnBookToLibrary(Item item) throws InvalidItemException {
@@ -108,7 +104,7 @@ public class LibraryManager {
     public String borrowedItems() {
         String result="";
         for(Item item:library.getItems()){
-            if(item.isCheckedOut()==true){
+            if(item.isCheckedOut()){
                 result+=item;
             }
         }

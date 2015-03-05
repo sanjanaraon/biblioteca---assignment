@@ -8,5 +8,5 @@ import java.util.List;
  */
 public interface MenuAction {
     void actionPerformed(LibraryManager libraryManager,InputOutput readerWriter,List<? extends Item> list,AccountManager manager)
-            throws IOException, InvalidItemException;
+            throws IOException;
 }

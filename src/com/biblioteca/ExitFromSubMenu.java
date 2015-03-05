@@ -13,7 +13,7 @@ public class ExitFromSubMenu implements MenuAction {
 
     @Override
     public void actionPerformed(LibraryManager libraryManager, InputOutput readerWriter, List<? extends Item> list,AccountManager manager)
-            throws IOException, InvalidItemException {
+            throws IOException {
         readerWriter.writeValue("Successful Exit");
         return;
 

@@ -8,13 +8,13 @@ import java.util.List;
  */
 public class DisplayDetailsMenuAction implements MenuAction {
 //    @Override
-//    public void actionPerformed(BibliotecaApp app,InputOutput readerWriter) throws IOException {
+//    public void actionPerformed(BibliotecaApp libraryManager,InputOutput readerWriter) throws IOException {
 //        printMessage("Books available for borrowing",readerWriter);
-//        printMessage(app.displayItemDetails(),readerWriter);
+//        printMessage(libraryManager.displayItemDetails(),readerWriter);
 //    }
     @Override
     public void actionPerformed(LibraryManager libraryManager, InputOutput readerWriter, List<? extends Item> list,AccountManager manager)
-            throws IOException, InvalidItemException {
+            throws IOException {
         printMessage("Items available for borrowing",readerWriter);
         printMessage(libraryManager.displayItemDetails(list),readerWriter);
     }

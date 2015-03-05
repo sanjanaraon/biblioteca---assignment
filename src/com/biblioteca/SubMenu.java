@@ -8,18 +8,18 @@ import java.util.List;
  */
 public class SubMenu {
     MenuAction[] menuMap;
-    private InputOutput inputOutput;
-    LibraryManager app;
+    InputOutput inputOutput;
+    LibraryManager libraryManager;
 
     public SubMenu(InputOutput inputOutput) {
-        this.inputOutput=inputOutput;
+        this.inputOutput = inputOutput;
         this.menuMap = menuInitializer();
     }
 
     public SubMenu(TestReaderWriter testReaderWriter, LibraryManager mockLibraryManager) {
-        this.inputOutput=testReaderWriter;
-        this.app= mockLibraryManager;
-        this.menuMap=menuInitializer();
+        this.inputOutput = testReaderWriter;
+        this.libraryManager = mockLibraryManager;
+        this.menuMap = menuInitializer();
     }
 
     private MenuAction[] menuInitializer() {
@@ -34,28 +34,12 @@ public class SubMenu {
     }
 
     public int menu(List<? extends Item> list, LibraryManager app, InputOutput inputOutput, AccountManager manager) throws IOException {
-        int choice=0;
+        int choice;
         do {
-            List<? extends Item> items=list;
-            try {
-                printMessage(app.displayMainMenu(),inputOutput);
-                choice = Integer.parseInt(acceptInput(inputOutput));
-            } catch (IOException e) {
-                inputOutput.writeValue(e.toString());
-            }
-
-            if (choice >= 1 && choice <= 4) {
-
-                try {
-                    menuMap[choice-1].actionPerformed(app, inputOutput,items,manager);
-                } catch (IOException e) {
-                    System.out.println(e);
-                } catch (InvalidItemException e) {
-                    System.out.println(e);
-                }
-            } else {
-                System.out.println("Enter a valid choice");
-            }
+            printMessage(app.displayMainMenu(), inputOutput);
+            choice = Integer.parseInt(acceptInput(inputOutput));
+            if (choice >= 1 && choice <= 4) menuMap[choice - 1].actionPerformed(app, inputOutput, list, manager);
+            else System.out.println("Enter a valid choice");
         } while (choice != 4);
         return choice;
     }

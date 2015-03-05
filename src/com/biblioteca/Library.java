@@ -27,23 +27,21 @@ public class Library {
         return itemList;
     }
 
-    public boolean checkOutItem(Item item) throws InvalidItemException {
-        if (itemList.contains(item) && item.isCheckedOut() == false) {
+    public void checkOutItem(Item item) throws InvalidItemException {
+        if (itemList.contains(item) && !item.isCheckedOut()) {
             resetCheckOut(item, true);
-            return true;
+            return;
         }
-        else
-            throw new InvalidItemException();
+        throw new InvalidItemException();
 
     }
 
     public boolean returnItem(Item item) throws InvalidItemException {
-        if (itemList.contains(item) && item.isCheckedOut() == true){
+        if (itemList.contains(item) && item.isCheckedOut()){
             resetCheckOut(item, false);
         return true;
         }
-        else
-            throw new InvalidItemException();
+        throw new InvalidItemException();
     }
 
     private void resetCheckOut(Item item, boolean flag) {
@@ -99,6 +97,17 @@ public class Library {
         }
         }
         return null;
+    }
+
+
+    public List<Item> getBorrowedItems(){
+        List<Item> borrowed=new ArrayList<Item>();
+        for(Item item:itemList){
+            if(item.isCheckedOut()==true){
+                borrowed.add(item);
+            }
+        }
+        return borrowed;
     }
 
 }

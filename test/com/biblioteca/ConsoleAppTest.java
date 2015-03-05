@@ -33,14 +33,14 @@ public class ConsoleAppTest {
     public void shouldDisplayWelcomeMessageForBook() throws Exception {
         consoleApp.printMessage(bookLibraryManager.displayWelcomeMessage());
         String expectedString = "Welcome to Biblioteca \n" +
-                " The app to borrow and return the books/movies to the library \n";
+                " The libraryManager to borrow and return the books/movies to the library \n";
         assertEquals(expectedString, testReaderWriter.consoleOutput());
     }
 
     @Test
     public void shouldDisplayWelcomeMessageForMovie() throws Exception {
         String expectedString = "Welcome to Biblioteca \n" +
-                " The app to borrow and return the books/movies to the library \n";
+                " The libraryManager to borrow and return the books/movies to the library \n";
         consoleApp.printMessage(movieLibraryManager.displayWelcomeMessage());
         assertEquals(expectedString, testReaderWriter.consoleOutput());
 
