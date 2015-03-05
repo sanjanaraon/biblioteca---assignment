@@ -1,82 +1,52 @@
 package com.biblioteca;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 /**
  * Created by sanjanar on 26/02/15.
  */
 public class ConsoleApp {
-
+    subMenuAction[] subMenuMap;
     private String input;
     private InputOutput inputOutput;
-    BibliotecaApp app;
-    MenuAction[] menuMap = new MenuAction[0];
-
-//    public ConsoleApp( InputOutput inputOutput, BibliotecaApp app) {
-//        this.menuMap = menuMap;
-//        this.inputOutput = inputOutput;
-//        this.app = app;
-//    }
+    LibraryManager app;
 
 
-
-
-
-    public ConsoleApp(InputOutput inputOutput) {
-        this.inputOutput = inputOutput;
-        this.app = new BibliotecaApp();
-        this.menuMap = menuInitializer();
-    }
-
-    public ConsoleApp(String s) {
-        this.input=s;
-    }
-
-    private MenuAction[] menuInitializer() {
-
-        return new MenuAction[]{
-                new DisplayDetailsMenuAction(),
-                new CheckOutBookMenuAction(),
-                new ReturnBookMenuAction(),
-                new ExitFromApplication(),
-
+    private subMenuAction[] menuInitializer() {
+        return new subMenuAction[]{
+                new BooksMenuAction(),
+                new MoviesMenuAction(),
+                new ExitApplication(),
         };
     }
 
-
-    public ConsoleApp(InputOutput inputOutput, BibliotecaApp mockBiblioteca) {
-        this.menuMap = menuInitializer();
+    public ConsoleApp(InputOutput inputOutput) {
         this.inputOutput = inputOutput;
-        this.app = mockBiblioteca;
+        this.app = new LibraryManager();
+        this.subMenuMap = menuInitializer();
     }
 
+
+    public ConsoleApp(InputOutput inputOutput, LibraryManager mockBiblioteca) {
+        this.inputOutput = inputOutput;
+        this.app = mockBiblioteca;
+        this.subMenuMap = menuInitializer();
+    }
+
+    AccountManager manager = new AccountManager();
+
     public void mainMenu() throws IOException {
+        int number;
         firstMessage();
-        int choice = 0;
-
         do {
-            try {
-                printMessage(app.displayMainMenu());
-                choice = Integer.parseInt(acceptInput());
-
-            } catch (IOException e) {
-                inputOutput.writeValue(e.toString());
-            }
-
-            if (choice >= 1 && choice <= 4) {
-
-                try {
-                    menuMap[choice-1].actionPerformed(app, inputOutput);
-                } catch (IOException e) {
-                    System.out.println(e);
-                } catch (InvalidBookException e) {
-                    System.out.println(e);
-                }
+            printMessage("Which library you want to use book(0)/movie(1)/Exit(2)\n Enter 0/1/2??");
+            number = Integer.parseInt(acceptInput());
+            if (number >= 0 && number <= 2) {
+                subMenuMap[number].subMenuActionPerformed(app, inputOutput, manager);
             } else {
-                System.out.println("Enter a valid choice");
+                printMessage("enter either 0 or 1 or 2");
             }
-        } while (choice != 4);
+        } while (number!=2);
     }
 
     public void firstMessage() {
