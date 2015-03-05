@@ -11,6 +11,6 @@ import static org.junit.Assert.assertEquals;
 public class MoviesTest {
     @Test
     public void shouldReturnTrueWhenTwoMoviesAreEqual() throws Exception {
-        
+
     }
 }

@@ -104,8 +104,7 @@ public class LibraryManager {
         }
         return null;
     }
-
-
+    
     public String borrowedItems() {
         String result="";
         for(Item item:library.getItems()){
