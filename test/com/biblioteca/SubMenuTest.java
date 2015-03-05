@@ -49,12 +49,11 @@ public class SubMenuTest {
         Book book = new Book("S C J P", "Kathy Serra", 2006);
 
         bookLibraryManager = mock(LibraryManager.class);
-        List<Item> list= bookLibraryManager.getItemListByCategory("book");
-       // Item newBook=bookLibraryManager.getItem("s c j p");
+        // Item newBook=bookLibraryManager.getItem("s c j p");
         subMenu =new SubMenu(testReaderWriter, bookLibraryManager);
 
         when(bookLibraryManager.displayMainMenu()).thenReturn("Main menu ");
-        when(bookLibraryManager.displaySpecificItemListDetails(list)).thenReturn("Book Details ");
+        when(bookLibraryManager.displaySpecificItemListDetails(bookLibraryManager.getItemListByCategory("book"))).thenReturn("Book Details ");
         when(bookLibraryManager.validTitle("S C J P")).thenReturn(true);
         when(bookLibraryManager.getItem("S C J P")).thenReturn(book);
         doNothing().when(bookLibraryManager).checkOutFromLibrary(book);
@@ -62,7 +61,7 @@ public class SubMenuTest {
 
         String expected = "Main menu Enter library numberEnter passwordBook Details Select a Item by entering the titleS C J P is checked out successfullyMain menu Successful Exit";
 
-        subMenu.menu(list, bookLibraryManager,testReaderWriter, manager);
+        subMenu.menu(bookLibraryManager.getItemListByCategory("book"), bookLibraryManager,testReaderWriter, manager);
 
         assertEquals(expected,testReaderWriter.consoleOutput());
 
