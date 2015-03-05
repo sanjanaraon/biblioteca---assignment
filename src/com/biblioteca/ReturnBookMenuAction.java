@@ -7,14 +7,14 @@ import java.util.List;
  * Created by sanjanar on 02/03/15.
  */
 public class ReturnBookMenuAction implements MenuAction {
-        AccountManager manager = new AccountManager();
+    AccountManager manager = new AccountManager();
 
     @Override
-    public void actionPerformed(LibraryManager libraryManager, InputOutput readerWriter, List<? extends Item> list,AccountManager manager)
+    public void actionPerformed(LibraryManager libraryManager, InputOutput readerWriter, List<? extends Item> list, AccountManager manager)
             throws IOException {
         UserInfo loggedInUser = manager.checkForLoggedInUser();
         if (loggedInUser != null) {
-            accessReturnItem(libraryManager, readerWriter,list);
+            accessReturnItem(libraryManager, readerWriter, list);
         } else {
             printMessage("Enter library number", readerWriter);
             String number = acceptInput(readerWriter);
@@ -30,15 +30,14 @@ public class ReturnBookMenuAction implements MenuAction {
     }
 
     private void accessReturnItem(LibraryManager libraryManager, InputOutput readerWriter, List<? extends Item> list) throws IOException {
-        printMessage(libraryManager.displaySpecificItemListDetails(list),readerWriter);
+        printMessage(libraryManager.displaySpecificItemListDetails(list), readerWriter);
         printMessage("Select a Item by entering the title", readerWriter);
         String title;
         title = acceptInput(readerWriter);
         Item book = libraryManager.getItem(title);
         try {
-            if (libraryManager.returnBookToLibrary(book)) {
-                printMessage(book.getTitle() + " returned to the library", readerWriter);
-            }
+            libraryManager.returnBookToLibrary(book);
+            printMessage(book.getTitle() + " returned to the library", readerWriter);
         } catch (InvalidItemException e) {
             System.out.println("That is a invalid Item");
         }

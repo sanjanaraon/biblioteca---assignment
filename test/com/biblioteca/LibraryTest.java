@@ -44,19 +44,7 @@ public class LibraryTest {
         assertEquals(9, library.getItems().size());
     }
 
-    @Test
-    public void shouldCheckOutABook() throws Exception {
-        Item book= library.getItem("S c j p");
-        library.checkOutItem(book);
-        assertTrue(book.isCheckedOut());
-    }
 
-    @Test
-    public void shouldCheckOutAMovie() throws Exception {
-        Item movie= library.getItem("Brave");
-        library.checkOutItem(movie);
-        assertTrue(movie.isCheckedOut());
-    }
 
     @Test(expected = InvalidItemException.class)
     public void shouldFailToRemoveBookWhenTheBookDoesNotExistInLibrary()  throws Exception{
@@ -96,62 +84,39 @@ public class LibraryTest {
 
     @Test
     public void shouldAddTheBookReturnedToBookList() throws Exception {
-        Book book1 = new Book("S C J P", "Kathy Serra", 2006);
-        library.addItem(book1);
         Book book2 = new Book("Let us C", "Yeshwanth", 2000);
-        library.addItem(book2);
-        book1.setCheckedOut(true);
-        library.returnItem(book1);
+      //  library.addItem(book2);
+        book2.setCheckedOut(true);
+        library.returnItem(book2);
+        assertEquals(library.getItems(), library.getAvailableItems());
+
     }
 
     @Test
     public void shouldAddTheMovieReturnedToMovieList() throws Exception {
         Movie movie1 = new Movie("Star wars",1977,"George Lucas","9");
-        library.addItem(movie1);
-        Movie movie2 = new Movie("The Terminator",1984,"James Cameron","8");
-        library.addItem(movie2);
         movie1.setCheckedOut(true);
         library.returnItem(movie1);
+        assertEquals(library.getItems(),library.getAvailableItems());
+
     }
 
-    @Test(expected = InvalidItemException.class)
-    public void shouldThrowAExceptionWhenInvalidBookIsAddedToBooksList() throws Exception {
-        Item book= library.getItem("a b c d");
-        library.returnItem(book);
-    }
 
-    @Test(expected = InvalidItemException.class)
-    public void shouldThrowAExceptionWhenInvalidMovieIsAddedToMovieList() throws Exception {
-        Item movie= library.getItem("air buddies");
-       library.returnItem(movie);
-    }
 
-    @Test(expected = InvalidItemException.class)
-    public void shouldThrowExceptionWhenUnCheckedBookIsAddedToBookList() throws Exception {
-        Item book= library.getItem("s c  j p");
-        library.returnItem(book);
-    }
-
-    @Test(expected = InvalidItemException.class)
-    public void shouldThrowExceptionWhenUnCheckedMovieIsAddedToMovieList() throws Exception {
-        Item movie= library.getItem("brave");
-        library.returnItem(movie);
-    }
-
-    @Test
-    public void shouldReturnListOfAvailableItemsToBeCheckedOut() throws Exception {
-        Book book1 = new Book("S C J P", "Kathy Serra", 2006);
-        Book book2 = new Book("Let us C", "Yeshwanth", 2000);
-        Book book3 = new Book("The art of computer programming", "Donald ", 1968);
-        Book book4=new Book("Learning Python", "Mark Lutz", 1999);
-        Movie movie1 = new Movie("Star wars",1977,"George Lucas","9");
-        Movie movie2 = new Movie("The Terminator",1984,"James Cameron","8");
-        Movie movie3=new Movie("Frozen",2013,"Jeniffer Lee","7");
-        Movie movie4=new Movie("Brave",2012,"Mark Andrews","unrated");
-        assertThat(library.getAvailableItems(), is(library.itemList));
-        library.checkOutItem(book2);
-        assertThat(library.getAvailableItems(), is(asList(book1, book3, book4, movie1, movie2, movie3, movie4)));
-    }
+//    @Test
+//    public void shouldReturnListOfAvailableItemsToBeCheckedOut() throws Exception {
+//        Book book1 = new Book("S C J P", "Kathy Serra", 2006);
+//        Book book2 = new Book("Let us C", "Yeshwanth", 2000);
+//        Book book3 = new Book("The art of computer programming", "Donald ", 1968);
+//        Book book4=new Book("Learning Python", "Mark Lutz", 1999);
+//        Movie movie1 = new Movie("Star wars",1977,"George Lucas","9");
+//        Movie movie2 = new Movie("The Terminator",1984,"James Cameron","8");
+//        Movie movie3=new Movie("Frozen",2013,"Jeniffer Lee","7");
+//        Movie movie4=new Movie("Brave",2012,"Mark Andrews","unrated");
+//        assertThat(library.getAvailableItems(), is(library.itemList));
+//        library.checkOutItem(book2);
+//        assertThat(library.getAvailableItems(), is(asList(book1, book3, book4, movie1, movie2, movie3, movie4)));
+//    }
 
 //    @Test
 //    public void shouldReturnListOfAvailableMoviesToBeCheckedOut() throws Exception {
@@ -164,42 +129,61 @@ public class LibraryTest {
 //        assertThat(library.getAvailableItems(), is(Arrays.<Item>asList(movie1, movie3, movie4)));
 //    }
 
+//    @Test
+//    public void shouldReturnListOfBorrowedBooksToBeReturned() throws Exception {
+//        List<Book> books=new ArrayList<Book>();
+//        Book book1 = new Book("S C J P", "Kathy Serra", 2006);
+//        books.add(book1);
+//        Book book2 = new Book("Let us C", "Yeshwanth", 2000);
+//        books.add(book2);
+//
+//        //List<Item> expected=getTempList();
+//        //assertEquals(expected,library.getBorrowedItems());
+//        assertThat(library.getBorrowedItems(), is(Arrays.<Item>asList()));
+//      //  book2.setCheckedOut(true);
+//        library.checkOutItem(book2);
+//       // List<Item> expected=getTempList(book2);
+//        assertThat(library.getBorrowedItems(), is(Arrays.<Item>asList(book2)));
+//       // assertEquals(expected,library.getBorrowedItems(books));
+//    }
+
+//    @Test
+//    public void shouldReturnListOfBorrowedMoviesToBeReturned() throws Exception {
+//        Movie movie2 = new Movie("The Terminator",1984,"James Cameron","8");
+//        List<Item> expected=getTempList();
+//        assertEquals(expected, library.getBorrowedItems());
+//        //assertThat(library.getBorrowedItems(), is(Arrays.<Item>asList()));
+//        library.checkOutItem(movie2);
+//        expected=getTempList(movie2);
+//       // assertThat(library.getBorrowedItems(), is(Arrays.<Item>asList(book2)));
+//        assertEquals(expected, library.getBorrowedItems());
+//    }
+
+//    private List<Item> getTempList(Item ... items ) {
+//        List<Item> list=new ArrayList<Item>();
+//        for(Item item:items){
+//            list.add(item);
+//        }
+//        return list;
+//    }
+
+
     @Test
-    public void shouldReturnListOfBorrowedBooksToBeReturned() throws Exception {
-        List<Book> books=new ArrayList<Book>();
+    public void shouldReturnListOfAvailableItemsWhenNoItemIsCheckedOut() throws Exception {
+        assertEquals(library.getItems(),library.getAvailableItems());
+    }
+
+    @Test
+    public void shouldReturnListOfAvailableItemsWhenAItemIsCheckedOut() throws Exception {
+        Movie movie1 = new Movie("Star wars",1977,"George Lucas","9");
+        library.checkOutItem(movie1);
         Book book1 = new Book("S C J P", "Kathy Serra", 2006);
-        books.add(book1);
         Book book2 = new Book("Let us C", "Yeshwanth", 2000);
-        books.add(book2);
-
-        //List<Item> expected=getTempList();
-        //assertEquals(expected,library.getBorrowedItems());
-        assertThat(library.getBorrowedItems(), is(Arrays.<Item>asList()));
-      //  book2.setCheckedOut(true);
-        library.checkOutItem(book2);
-       // List<Item> expected=getTempList(book2);
-        assertThat(library.getBorrowedItems(), is(Arrays.<Item>asList(book2)));
-       // assertEquals(expected,library.getBorrowedItems(books));
-    }
-
-    @Test
-    public void shouldReturnListOfBorrowedMoviesToBeReturned() throws Exception {
+        Book book3 = new Book("The art of computer programming", "Donald ", 1968);
+        Book book4=new Book("Learning Python", "Mark Lutz", 1999);
         Movie movie2 = new Movie("The Terminator",1984,"James Cameron","8");
-        List<Item> expected=getTempList();
-        assertEquals(expected, library.getBorrowedItems());
-        //assertThat(library.getBorrowedItems(), is(Arrays.<Item>asList()));
-        library.checkOutItem(movie2);
-        expected=getTempList(movie2);
-       // assertThat(library.getBorrowedItems(), is(Arrays.<Item>asList(book2)));
-        assertEquals(expected, library.getBorrowedItems());
+        Movie movie3=new Movie("Frozen",2013,"Jeniffer Lee","7");
+        Movie movie4=new Movie("Brave",2012,"Mark Andrews","unrated");
+        assertThat(library.getAvailableItems(),is(Arrays.<Item>asList(book1,book2,book3,book4,movie2,movie3,movie4)));
     }
-
-    private List<Item> getTempList(Item ... items ) {
-        List<Item> list=new ArrayList<Item>();
-        for(Item item:items){
-            list.add(item);
-        }
-        return list;
-    }
-
 }

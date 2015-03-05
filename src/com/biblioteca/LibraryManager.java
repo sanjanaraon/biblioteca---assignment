@@ -61,35 +61,32 @@ public class LibraryManager {
     }
 
 
-    public String displayListOfBorrowedItems(List<? extends Item> list ){
-        List<Item> itemList=library.getBorrowedItems();
-        List<Item> specificItem = getSpecificItemList(list, itemList);
-        String result="";
-        for(Item b:specificItem){
-            result+=b+"\n";
-        }
-        return result;
-    }
+//    public String displayListOfBorrowedItems(List<? extends Item> list ){
+//        List<Item> itemList=library.getBorrowedItems();
+//        List<Item> specificItem = getSpecificItemList(list, itemList);
+//        String result="";
+//        for(Item b:specificItem){
+//            result+=b+"\n";
+//        }
+//        return result;
+//    }
 
-    private List<Item> getSpecificItemList(List<? extends Item> list, List<Item> itemList) {
-        List<Item> specificItem=new ArrayList<Item>();
-        for(Item i:itemList){
-            if(list.getClass().equals(i.getClass())){
-                specificItem.add(i);
-            }
-        }
-        return specificItem;
-    }
+//    private List<Item> getSpecificItemList(List<? extends Item> list, List<Item> itemList) {
+//        List<Item> specificItem=new ArrayList<Item>();
+//        for(Item i:itemList){
+//            if(list.getClass().equals(i.getClass())){
+//                specificItem.add(i);
+//            }
+//        }
+//        return specificItem;
+//    }
 
     public void checkOutFromLibrary(Item item) throws InvalidItemException {
         library.checkOutItem(item);
     }
 
-    public boolean returnBookToLibrary(Item item) throws InvalidItemException {
-        if(library.returnItem(item)){
-            return true;
-        }
-        return false;
+    public void returnBookToLibrary(Item item) throws InvalidItemException {
+        library.returnItem(item) ;
     }
 
     public Item getItem(String title) {

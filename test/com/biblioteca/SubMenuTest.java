@@ -95,11 +95,11 @@ public class SubMenuTest {
 
         when(bookLibraryManager.displayMainMenu()).thenReturn("main menu");
         Book book1 = new Book("S C J P", "Kathy Serra", 2006);
-        when(bookLibraryManager.getItem("s c j p")).thenReturn(book1);
+        when(bookLibraryManager.getItem("S C J P")).thenReturn(book1);
         when(bookLibraryManager.displaySpecificItemListDetails(list)).thenReturn("books");
-        when(bookLibraryManager.returnBookToLibrary(book1)).thenReturn(true);
+        doNothing().when(bookLibraryManager).returnBookToLibrary(book1);
         testReaderWriter.consoleInput("3\nlib-1000\nuser1\nS C J P\n4");
-        String expected = "main menuEnter library numberEnter passwordbooksSelect a Item by entering the titlemain menuSuccessful Exit";
+        String expected = "main menuEnter library numberEnter passwordbooksSelect a Item by entering the titleS C J P returned to the librarymain menuSuccessful Exit";
         subMenu.menu(list, bookLibraryManager,testReaderWriter, manager);
         assertEquals(expected,testReaderWriter.consoleOutput());
 
@@ -114,9 +114,9 @@ public class SubMenuTest {
 
         when(bookLibraryManager.displayMainMenu()).thenReturn("main menu");
         Book book1 = new Book("S C J P", "Kathy Serra", 2006);
-        when(bookLibraryManager.getItem("s c j p")).thenReturn(book1);
+        when(bookLibraryManager.getItem("S C J P")).thenReturn(book1);
         when(bookLibraryManager.displaySpecificItemListDetails(list)).thenReturn("books");
-        when(bookLibraryManager.returnBookToLibrary(book1)).thenReturn(true);
+        doNothing().when(bookLibraryManager).returnBookToLibrary(book1);
         testReaderWriter.consoleInput("3\nlib-1000\nuasd\n4");
         String expected = "main menuEnter library numberEnter passwordNot a valid usermain menuSuccessful Exit";
         subMenu.menu(list, bookLibraryManager,testReaderWriter, manager);

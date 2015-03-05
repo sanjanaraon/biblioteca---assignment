@@ -36,10 +36,10 @@ public class Library {
 
     }
 
-    public boolean returnItem(Item item) throws InvalidItemException {
+    public void returnItem(Item item) throws InvalidItemException {
         if (itemList.contains(item) && item.isCheckedOut()){
             resetCheckOut(item, false);
-        return true;
+            return;
         }
         throw new InvalidItemException();
     }
@@ -90,24 +90,24 @@ public class Library {
     }
 
 
-    public Item getItem(String title) {
-        for(Item item:itemList){
-        if(item.getTitle().equalsIgnoreCase(title)){
-            return item;
-        }
-        }
-        return null;
-    }
+//    public Item getItem(String title) {
+//        for(Item item:itemList){
+//        if(item.getTitle().equalsIgnoreCase(title)){
+//            return item;
+//        }
+//        }
+//        return null;
+//    }
 
 
-    public List<Item> getBorrowedItems(){
-        List<Item> borrowed=new ArrayList<Item>();
-        for(Item item:itemList){
-            if(item.isCheckedOut()==true){
-                borrowed.add(item);
-            }
-        }
-        return borrowed;
-    }
+//    public List<Item> getBorrowedItems(){
+//        List<Item> borrowed=new ArrayList<Item>();
+//        for(Item item:itemList){
+//            if(item.isCheckedOut()==true){
+//                borrowed.add(item);
+//            }
+//        }
+//        return borrowed;
+//    }
 
 }

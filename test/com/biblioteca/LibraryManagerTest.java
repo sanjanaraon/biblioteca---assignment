@@ -133,7 +133,7 @@ public class LibraryManagerTest {
         Book book1 = new Book("S C J P", "Kathy Serra", 2006);
         Library mockLibrary = mock(Library.class);
 
-        when(mockLibrary.returnItem(book1)).thenReturn(true);
+        doNothing().when(mockLibrary).returnItem(book1);
 
         bookLibraryManager = new LibraryManager(mockLibrary);
         bookLibraryManager.returnBookToLibrary(book1);
@@ -146,7 +146,7 @@ public class LibraryManagerTest {
         Movie movie1 = new Movie("Star wars",1977,"George Lucas","9");
         Library mockLibrary = mock(Library.class);
 
-        when(mockLibrary.returnItem(movie1)).thenReturn(true);
+        doNothing().when(mockLibrary).returnItem(movie1);
 
         movieLibraryManager = new LibraryManager(mockLibrary);
         movieLibraryManager.returnBookToLibrary(movie1);
@@ -272,6 +272,11 @@ public class LibraryManagerTest {
             result+=i+"\n";
         }
         return result;
+    }
+
+    @Test
+    public void shouldReturnListOfBooks() throws Exception {
+
     }
 }
 
