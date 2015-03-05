@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by sanjanar on 02/03/15.
  */
-public class ExitFromApplication implements MenuAction {
+public class ExitFromSubMenu implements MenuAction {
 //    @Override
 //    public void actionPerformed( BibliotecaApp bibliotecaApp, InputOutput readerWriter) throws IOException, InvalidItemException {
 //    }

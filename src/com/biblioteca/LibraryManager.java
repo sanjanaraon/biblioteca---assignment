@@ -73,14 +73,14 @@ public class LibraryManager {
     }
 
 
-    public String getItems() {
-        List<Item> itemList=library.getItems();
-        String result="";
-        for(Item b:itemList){
-            result+=b+"\n";
-        }
-        return result;
-    }
+//    public String getItems() {
+//        List<Item> itemList=library.getItems();
+//        String result="";
+//        for(Item b:itemList){
+//            result+=b+"\n";
+//        }
+//        return result;
+//    }
 
     public boolean checkOutFromLibrary(Item item) throws InvalidItemException {
         if (library.checkOutItem(item)){
@@ -104,7 +104,7 @@ public class LibraryManager {
         }
         return null;
     }
-    
+
     public String borrowedItems() {
         String result="";
         for(Item item:library.getItems()){

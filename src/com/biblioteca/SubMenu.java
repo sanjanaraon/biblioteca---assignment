@@ -28,7 +28,7 @@ public class SubMenu {
                 new DisplayDetailsMenuAction(),
                 new CheckOutBookMenuAction(),
                 new ReturnBookMenuAction(),
-                new ExitFromApplication(),
+                new ExitFromSubMenu(),
 
         };
     }
