@@ -16,22 +16,22 @@ import static org.mockito.Mockito.*;
 public class ConsoleAppTest {
     TestReaderWriter testReaderWriter;
     ConsoleApp consoleApp;
-    BibliotecaApp bookBibliotecaApp;
-    BibliotecaApp movieBibliotecaApp;
+    LibraryManager bookLibraryManager;
+    LibraryManager movieLibraryManager;
 
 
     @Before
     public void setUp() {
         testReaderWriter = new TestReaderWriter();
         consoleApp = new ConsoleApp(testReaderWriter);
-        bookBibliotecaApp = new BibliotecaApp(BibliotecaApp.createLibraryWithBooks());
-        movieBibliotecaApp=new BibliotecaApp(BibliotecaApp.createLibraryWithMovies());
+        bookLibraryManager = new LibraryManager(LibraryManager.createLibraryWithBooks());
+        movieLibraryManager =new LibraryManager(LibraryManager.createLibraryWithMovies());
 
     }
 
     @Test
     public void shouldDisplayWelcomeMessageForBook() throws Exception {
-        consoleApp.printMessage(bookBibliotecaApp.displayWelcomeMessage());
+        consoleApp.printMessage(bookLibraryManager.displayWelcomeMessage());
         String expectedString = "Welcome to Biblioteca \n" +
                 " The app to borrow and return the books/movies to the library \n";
         assertEquals(expectedString, testReaderWriter.consoleOutput());
@@ -41,14 +41,14 @@ public class ConsoleAppTest {
     public void shouldDisplayWelcomeMessageForMovie() throws Exception {
         String expectedString = "Welcome to Biblioteca \n" +
                 " The app to borrow and return the books/movies to the library \n";
-        consoleApp.printMessage(movieBibliotecaApp.displayWelcomeMessage());
+        consoleApp.printMessage(movieLibraryManager.displayWelcomeMessage());
         assertEquals(expectedString, testReaderWriter.consoleOutput());
 
     }
 
     @Test
     public void shouldDisplayMainMenu() throws Exception {
-        consoleApp.printMessage(bookBibliotecaApp.displayMainMenu());
+        consoleApp.printMessage(bookLibraryManager.displayMainMenu());
         String expectedString = "Main menu \n" +
                 " 1 ---- Item Details \n" +
                 " 2 ---- Check Out a Item\n" +
@@ -68,7 +68,7 @@ public class ConsoleAppTest {
 
     @Test
     public void checkFirstMessagePrintedIsWelcomeMessage() throws Exception {
-        BibliotecaApp mockBiblioteca = mock(BibliotecaApp.class);
+        LibraryManager mockBiblioteca = mock(LibraryManager.class);
         consoleApp=new ConsoleApp(testReaderWriter,mockBiblioteca);
         when(mockBiblioteca.displayWelcomeMessage()).thenReturn("Welcome to Biblioteca \n");
         String excepted = "Welcome to Biblioteca \n";
@@ -81,7 +81,7 @@ public class ConsoleAppTest {
 
     @Test
     public void testForMainMenu() throws Exception {
-        BibliotecaApp mockBiblioteca = mock(BibliotecaApp.class);
+        LibraryManager mockBiblioteca = mock(LibraryManager.class);
         consoleApp=new ConsoleApp(testReaderWriter,mockBiblioteca);
         when(mockBiblioteca.displayWelcomeMessage()).thenReturn("Welcome to Biblioteca ");
         when(mockBiblioteca.displayMainMenu()).thenReturn("main menu ");

@@ -9,18 +9,18 @@ import java.util.List;
 public class CheckOutBookMenuAction implements MenuAction {
 
     @Override
-    public void actionPerformed(BibliotecaApp bibliotecaApp, InputOutput readerWriter, List<? extends Item> list,AccountManager manager)
+    public void actionPerformed(LibraryManager libraryManager, InputOutput readerWriter, List<? extends Item> list,AccountManager manager)
             throws IOException, InvalidItemException {
         UserInfo loggedInUser = manager.checkForLoggedInUser();
         if (loggedInUser != null) {
-            accessCheckOutMenu(bibliotecaApp, readerWriter, list);
+            accessCheckOutMenu(libraryManager, readerWriter, list);
         }else {
             printMessage("Enter library number", readerWriter);
             String number = acceptInput(readerWriter);
             printMessage("Enter password", readerWriter);
             String pswd = acceptInput(readerWriter);
             if (manager.checkCredentials(number, pswd)) {
-                accessCheckOutMenu(bibliotecaApp, readerWriter, list);
+                accessCheckOutMenu(libraryManager, readerWriter, list);
             }else{
                 printMessage("Not a valid user",readerWriter);
                 return;
@@ -28,16 +28,16 @@ public class CheckOutBookMenuAction implements MenuAction {
         }
     }
 
-    private void accessCheckOutMenu(BibliotecaApp bibliotecaApp, InputOutput readerWriter, List<? extends Item> list) throws IOException {
-        printMessage(bibliotecaApp.displaySpecificItemListDetails(list), readerWriter);
+    private void accessCheckOutMenu(LibraryManager libraryManager, InputOutput readerWriter, List<? extends Item> list) throws IOException {
+        printMessage(libraryManager.displaySpecificItemListDetails(list), readerWriter);
         String title;
         Item item;
         printMessage("Select a Item by entering the title", readerWriter);
         title = acceptInput(readerWriter);
-        if (bibliotecaApp.validTitle(title)) {
-            item = bibliotecaApp.getItem(title);
+        if (libraryManager.validTitle(title)) {
+            item = libraryManager.getItem(title);
             try {
-                if (bibliotecaApp.checkOutFromLibrary(item)) {
+                if (libraryManager.checkOutFromLibrary(item)) {
                     printMessage(item.getTitle() + " is checked out successfully", readerWriter);
                 }
 

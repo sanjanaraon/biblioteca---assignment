@@ -9,16 +9,16 @@ public class ConsoleApp {
 
     private String input;
     private InputOutput inputOutput;
-    BibliotecaApp app;
+    LibraryManager app;
 
 
     public ConsoleApp(InputOutput inputOutput) {
         this.inputOutput = inputOutput;
-        this.app=new BibliotecaApp();
+        this.app=new LibraryManager();
     }
 
 
-    public ConsoleApp(InputOutput inputOutput, BibliotecaApp mockBiblioteca) {
+    public ConsoleApp(InputOutput inputOutput, LibraryManager mockBiblioteca) {
         this.inputOutput = inputOutput;
         this.app = mockBiblioteca;
     }

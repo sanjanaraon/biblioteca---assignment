@@ -1,25 +1,24 @@
 package com.biblioteca;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by sanjanar on 04/03/15.
  */
 public class SubMenu {
-    MenuAction[] menuMap = new MenuAction[0];
+    MenuAction[] menuMap;
     private InputOutput inputOutput;
-    BibliotecaApp app;
+    LibraryManager app;
 
     public SubMenu(InputOutput inputOutput) {
         this.inputOutput=inputOutput;
         this.menuMap = menuInitializer();
     }
 
-    public SubMenu(TestReaderWriter testReaderWriter, BibliotecaApp mockBibliotecaApp) {
+    public SubMenu(TestReaderWriter testReaderWriter, LibraryManager mockLibraryManager) {
         this.inputOutput=testReaderWriter;
-        this.app=mockBibliotecaApp;
+        this.app= mockLibraryManager;
         this.menuMap=menuInitializer();
     }
 
@@ -34,7 +33,7 @@ public class SubMenu {
         };
     }
 
-    public int menu(List<? extends Item> list, BibliotecaApp app, InputOutput inputOutput, AccountManager manager) throws IOException {
+    public int menu(List<? extends Item> list, LibraryManager app, InputOutput inputOutput, AccountManager manager) throws IOException {
         int choice=0;
         do {
             List<? extends Item> items=list;

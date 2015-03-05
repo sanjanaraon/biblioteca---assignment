@@ -10,8 +10,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class MoviesTest {
     @Test
-    public void shouldPrintMovieDetails() throws Exception {
-        Movie movie=new Movie("The Terminator",1984,"James Cameron","8");
-        assertEquals(new Movie("The Terminator",1984,"James Cameron","8").toString(),movie.toString());
+    public void shouldReturnTrueWhenTwoMoviesAreEqual() throws Exception {
+        
     }
 }

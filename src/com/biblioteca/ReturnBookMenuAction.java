@@ -10,18 +10,18 @@ public class ReturnBookMenuAction implements MenuAction {
         AccountManager manager = new AccountManager();
 
     @Override
-    public void actionPerformed(BibliotecaApp bibliotecaApp, InputOutput readerWriter, List<? extends Item> list,AccountManager manager)
+    public void actionPerformed(LibraryManager libraryManager, InputOutput readerWriter, List<? extends Item> list,AccountManager manager)
             throws IOException, InvalidItemException {
         UserInfo loggedInUser = manager.checkForLoggedInUser();
         if (loggedInUser != null) {
-            accessReturnItem(bibliotecaApp, readerWriter,list);
+            accessReturnItem(libraryManager, readerWriter,list);
         } else {
             printMessage("Enter library number", readerWriter);
             String number = acceptInput(readerWriter);
             printMessage("Enter password", readerWriter);
             String pswd = acceptInput(readerWriter);
             if (manager.checkCredentials(number, pswd)) {
-                accessReturnItem(bibliotecaApp, readerWriter, list);
+                accessReturnItem(libraryManager, readerWriter, list);
             } else {
                 printMessage("Not a valid user", readerWriter);
                 return;
@@ -29,14 +29,14 @@ public class ReturnBookMenuAction implements MenuAction {
         }
     }
 
-    private void accessReturnItem(BibliotecaApp bibliotecaApp, InputOutput readerWriter, List<? extends Item> list) throws IOException {
-        printMessage(bibliotecaApp.displaySpecificItemListDetails(list),readerWriter);
+    private void accessReturnItem(LibraryManager libraryManager, InputOutput readerWriter, List<? extends Item> list) throws IOException {
+        printMessage(libraryManager.displaySpecificItemListDetails(list),readerWriter);
         printMessage("Select a Item by entering the title", readerWriter);
         String title;
         title = acceptInput(readerWriter);
-        Item book = bibliotecaApp.getItem(title);
+        Item book = libraryManager.getItem(title);
         try {
-            if (bibliotecaApp.returnBookToLibrary(book)) {
+            if (libraryManager.returnBookToLibrary(book)) {
                 printMessage(book.getTitle() + " returned to the library", readerWriter);
             }
         } catch (InvalidItemException e) {

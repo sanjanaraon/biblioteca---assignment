@@ -27,15 +27,15 @@ public class Movie implements Item{
         return category;
     }
 
-    @Override
-    public String toString() {
-        return "Movie{" +
-                "title='" + title + '\'' +
-                ", year=" + year +
-                ", director='" + director + '\'' +
-                ", rating='" + rating + '\'' +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "Movie{" +
+//                "title='" + title + '\'' +
+//                ", year=" + year +
+//                ", director='" + director + '\'' +
+//                ", rating='" + rating + '\'' +
+//                '}';
+//    }
 
     @Override
     public boolean equals(Object newMovie){

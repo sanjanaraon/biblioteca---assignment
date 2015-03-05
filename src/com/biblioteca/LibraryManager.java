@@ -6,16 +6,16 @@ import java.util.List;
 /**
  * Created by sanjanar on 26/02/15.
  */
-public class BibliotecaApp {
+public class LibraryManager {
 //    Library bookLibrary=createLibraryWithBooks();
 //     Library movieLibrary=createLibraryWithMovies();
     Library library;
-    public BibliotecaApp() {
+    public LibraryManager() {
 
             this.library = new Library();
     }
 
-    public BibliotecaApp(Library library){
+    public LibraryManager(Library library){
         this.library=library;
     }
 
