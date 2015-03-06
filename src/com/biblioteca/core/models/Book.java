@@ -1,7 +1,5 @@
 package com.biblioteca.core.models;
 
-import com.biblioteca.Item;
-
 /**
  * Created by sanjanar on 25/02/15.
  */
