@@ -1,21 +1,22 @@
 package com.biblioteca;
 
+import com.biblioteca.core.exceptions.InvalidItemException;
 import com.biblioteca.core.models.Book;
+import com.biblioteca.core.models.Item;
 import com.biblioteca.core.models.Library;
 import com.biblioteca.core.models.Movie;
-import com.biblioteca.exceptions.InvalidItemException;
 import org.junit.Before;
 import org.junit.Test;
-
-//import static org.hamcrest.MatcherAssert.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.core.IsCollectionContaining.hasItem;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+
+//import static org.hamcrest.MatcherAssert.*;
 
 /**
  * Created by sanjanar on 25/02/15.

@@ -1,7 +1,7 @@
 package com.biblioteca;
 
 import com.biblioteca.core.models.UserInfo;
-import com.biblioteca.security.AccountManager;
+import com.biblioteca.core.security.AccountManager;
 import org.junit.Before;
 import org.junit.Test;
 

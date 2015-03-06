@@ -1,16 +1,13 @@
 package com.biblioteca;
 
-import com.biblioteca.core.controller.ConsoleApp;
-import com.biblioteca.core.controller.LibraryManager;
+import com.biblioteca.ui.controller.ConsoleApp;
+import com.biblioteca.ui.controller.LibraryManager;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by sanjanar on 27/02/15.
