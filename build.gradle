@@ -1,0 +1,47 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'base'
+sourceSets {
+    main {
+        java {
+            srcDir 'src'
+        }
+        resources {
+            srcDir 'src/resources'
+        }
+    }
+    test {
+        java {
+            srcDir 'test'
+        }
+    }
+
+}
+
+repositories{
+    mavenCentral()
+}
+
+dependencies {
+    testCompile ('junit:junit-dep:4.+') {
+        exclude module : 'hamcrest'
+        exclude module : 'hamcrest-core'
+    }
+    testCompile 'org.hamcrest:hamcrest-library:1.2.1'
+    testCompile group:'org.mockito',name:'mockito-core',version:'1.10.+'
+}
+
+sourceCompatibility=1.6
+
+jar{
+    manifest{
+        attributes 'Implementation-Title':'Biblioteca-app',
+                'Implementation-Version':1.0,
+                'Main-Class':'com.biblioteca.AppStarter'
+    }
+}
+
+
+
+
+
