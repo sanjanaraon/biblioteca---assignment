@@ -1,7 +1,6 @@
 package com.biblioteca.core.models;
 
-import com.biblioteca.exceptions.InvalidItemException;
-import com.biblioteca.Item;
+import com.biblioteca.core.exceptions.InvalidItemException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +9,7 @@ import java.util.List;
  * Created by sanjanar on 25/02/15.
  */
 public class Library {
-    List<Item> itemList=new ArrayList<Item>();
+    public List<Item> itemList=new ArrayList<Item>();
 
     public Library() {
         rentInitializer();
@@ -30,7 +29,7 @@ public class Library {
         return itemList;
     }
 
-    public void checkOutItem(Item item) throws InvalidItemException {
+    public void checkOutItem(Item item) throws InvalidItemException{
         if (itemList.contains(item) && !item.isCheckedOut()) {
             resetCheckOut(item, true);
             return;
