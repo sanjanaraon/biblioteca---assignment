@@ -43,7 +43,7 @@ public class SubMenu {
             printMessage(app.displayMainMenu(), inputOutput);
             choice = Integer.parseInt(acceptInput(inputOutput));
             if (choice >= 1 && choice <= 3) menuMap[choice - 1].actionPerformed(app, inputOutput, list, manager);
-            else System.out.println("Enter a valid choice");
+            else printMessage("Enter a valid choice",inputOutput);
         } while (choice != 4);
         inputOutput.writeValue("Successful Exit from Menu");
         return choice;
