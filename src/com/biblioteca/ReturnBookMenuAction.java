@@ -1,5 +1,10 @@
 package com.biblioteca;
 
+import com.biblioteca.core.controller.LibraryManager;
+import com.biblioteca.core.models.UserInfo;
+import com.biblioteca.exceptions.InvalidItemException;
+import com.biblioteca.security.AccountManager;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -30,7 +35,8 @@ public class ReturnBookMenuAction implements MenuAction {
     }
 
     private void accessReturnItem(LibraryManager libraryManager, InputOutput readerWriter, List<? extends Item> list) throws IOException {
-        printMessage(libraryManager.displaySpecificItemListDetails(list), readerWriter);
+        List<Item> borrowedItem=libraryManager.borrowedItems(list);
+        printMessage(libraryManager.displayItemDetailsInTableForm(borrowedItem), readerWriter);
         printMessage("Select a Item by entering the title", readerWriter);
         String title;
         title = acceptInput(readerWriter);

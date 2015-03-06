@@ -1,6 +1,6 @@
 package com.biblioteca;
 
-import java.io.IOException;
+import com.biblioteca.core.controller.ConsoleApp;
 
 /**
  * Created by sanjanar on 27/02/15.

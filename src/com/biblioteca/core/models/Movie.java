@@ -1,11 +1,12 @@
-package com.biblioteca;
+package com.biblioteca.core.models;
 
 
+import com.biblioteca.Item;
 
 /**
  * Created by sanjanar on 03/03/15.
  */
-public class Movie implements Item{
+public class Movie implements Item {
     private String title;
     private int year;
     private String director;

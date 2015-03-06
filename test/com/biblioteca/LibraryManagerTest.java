@@ -1,5 +1,10 @@
 package com.biblioteca;
 
+import com.biblioteca.core.controller.LibraryManager;
+import com.biblioteca.core.models.Book;
+import com.biblioteca.core.models.Library;
+import com.biblioteca.core.models.Movie;
+import com.biblioteca.exceptions.InvalidItemException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -195,14 +200,16 @@ public class LibraryManagerTest {
     public void shouldDisplayListOfBorrowedBooks() throws Exception {
         Book book1 = new Book("S C J P", "Kathy Serra", 2006);
         bookLibraryManager.checkOutFromLibrary(book1);
-        assertEquals(book1.toString(), bookLibraryManager.borrowedItems());
+        List<Item> list = bookLibraryManager.getItemListByCategory("book");
+        assertEquals(Arrays.asList(book1), bookLibraryManager.borrowedItems(list));
     }
 
     @Test
     public void shouldDisplayListOfBorrowedMovies() throws Exception {
         Movie movie1 = new Movie("Star wars",1977,"George Lucas","9");
         movieLibraryManager.checkOutFromLibrary(movie1);
-        assertEquals(movie1.toString(), movieLibraryManager.borrowedItems());
+        List<Item> list=movieLibraryManager.getItemListByCategory("movie");
+       assertEquals(Arrays.asList(movie1), movieLibraryManager.borrowedItems(list));
     }
 
     @Test
@@ -225,6 +232,19 @@ public class LibraryManagerTest {
         assertFalse(movieLibraryManager.validTitle("a b x"));
     }
 
+    @Test
+    public void shouldDisplayListOfBooksWhenBookListIsPassed() throws Exception {
+        List<Item> bookList= bookLibraryManager.getItemListByCategory("book");
+        String excepted=displayItemsInString(bookList);
+        assertEquals(excepted, bookLibraryManager.displaySpecificItemListDetails(bookList));
+    }
+
+    @Test
+    public void shouldDisplayListOfMoviesWhenMovieListIsPassed() throws Exception {
+        List<Item> movieList= movieLibraryManager.getItemListByCategory("movie");
+        String excepted=displayItemsInString(movieList);
+        assertEquals(excepted, bookLibraryManager.displaySpecificItemListDetails(movieList));
+    }
 
     @Test
     public void shouldReturnBookListWhenCategoryIsSpecifiedAsBook() throws Exception {
@@ -252,19 +272,6 @@ public class LibraryManagerTest {
         assertThat(movieList,  is(Arrays.<Item>asList(movie1, movie2, movie3, movie4)));
     }
 
-    @Test
-    public void shouldDisplayListOfBooksWhenBookListIsPassed() throws Exception {
-        List<Item> bookList= bookLibraryManager.getItemListByCategory("book");
-        String excepted=displayItemsInString(bookList);
-        assertEquals(excepted, bookLibraryManager.displaySpecificItemListDetails(bookList));
-    }
-
-    @Test
-    public void shouldDisplayListOfMoviesWhenMovieListIsPassed() throws Exception {
-        List<Item> movieList= movieLibraryManager.getItemListByCategory("movie");
-        String excepted=displayItemsInString(movieList);
-        assertEquals(excepted, bookLibraryManager.displaySpecificItemListDetails(movieList));
-    }
 
     private String displayItemsInString(List<Item> list) {
         String result="";
@@ -275,8 +282,9 @@ public class LibraryManagerTest {
     }
 
     @Test
-    public void shouldReturnListOfBooks() throws Exception {
-
+    public void shouldDisplayListOfBooksInTableForm() throws Exception {
+        List<Item> books=bookLibraryManager.getItemListByCategory("book");
+        bookLibraryManager.displayItemDetailsInTableForm(books);
     }
 }
 

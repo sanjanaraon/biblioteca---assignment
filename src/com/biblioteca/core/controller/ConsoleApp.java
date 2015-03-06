@@ -1,4 +1,11 @@
-package com.biblioteca;
+package com.biblioteca.core.controller;
+
+import com.biblioteca.BooksMenuAction;
+import com.biblioteca.InputOutput;
+import com.biblioteca.MoviesMenuAction;
+import com.biblioteca.SubMenuAction;
+import com.biblioteca.core.controller.LibraryManager;
+import com.biblioteca.security.AccountManager;
 
 import java.io.IOException;
 
@@ -6,17 +13,16 @@ import java.io.IOException;
  * Created by sanjanar on 26/02/15.
  */
 public class ConsoleApp {
-    subMenuAction[] subMenuMap;
+    SubMenuAction[] subMenuMap;
     private String input;
     private InputOutput inputOutput;
     LibraryManager app;
 
 
-    private subMenuAction[] menuInitializer() {
-        return new subMenuAction[]{
+    private SubMenuAction[] menuInitializer() {
+        return new SubMenuAction[]{
                 new BooksMenuAction(),
                 new MoviesMenuAction(),
-                new ExitApplication(),
         };
     }
 
@@ -39,14 +45,15 @@ public class ConsoleApp {
         int number;
         firstMessage();
         do {
-            printMessage("Which library you want to use book(0)/movie(1)/Exit(2)\n Enter 0/1/2??");
+            printMessage("Which library you want to use book(1)/movie(2)/Exit(3)\n Enter 0/1/2??");
             number = Integer.parseInt(acceptInput());
-            if (number >= 0 && number <= 2) {
-                subMenuMap[number].subMenuActionPerformed(app, inputOutput, manager);
+            if (number >= 1 && number <= 2) {
+                subMenuMap[number-1].subMenuActionPerformed(app, inputOutput, manager);
             } else {
                 printMessage("enter either 0 or 1 or 2");
             }
-        } while (number!=2);
+        } while (number!=3);
+        inputOutput.writeValue("Successful Exit From Biblioteca App");
     }
 
     public void firstMessage() {

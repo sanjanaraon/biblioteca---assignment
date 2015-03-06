@@ -1,4 +1,4 @@
-package com.biblioteca;
+package com.biblioteca.core.models;
 
 /**
  * Created by sanjanar on 04/03/15.

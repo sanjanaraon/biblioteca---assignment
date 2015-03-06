@@ -1,5 +1,8 @@
 package com.biblioteca;
 
+import com.biblioteca.core.controller.LibraryManager;
+import com.biblioteca.security.AccountManager;
+
 import java.io.IOException;
 import java.util.List;
 

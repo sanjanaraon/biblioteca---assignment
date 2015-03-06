@@ -1,5 +1,7 @@
 package com.biblioteca;
 
+import com.biblioteca.core.controller.ConsoleApp;
+import com.biblioteca.core.controller.LibraryManager;
 import org.junit.Before;
 import org.junit.Test;
 

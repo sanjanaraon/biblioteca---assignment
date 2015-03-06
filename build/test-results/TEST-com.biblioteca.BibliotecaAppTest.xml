@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.biblioteca.BibliotecaAppTest" tests="26" skipped="0" failures="0" errors="0" timestamp="2015-03-05T04:08:27" hostname="INsanjanar.local" time="0.142">
+  <properties/>
+  <testcase name="shouldReturnMovieListWhenCategoryIsSpecifiedAsMovie" classname="com.biblioteca.BibliotecaAppTest" time="0.004"/>
+  <testcase name="shouldReturnTrueWhenAValidMovieTitleIsPassed" classname="com.biblioteca.BibliotecaAppTest" time="0.0"/>
+  <testcase name="shouldReturnTrueWhenAValidBookTitleIsPassed" classname="com.biblioteca.BibliotecaAppTest" time="0.0"/>
+  <testcase name="shouldReturnMovieBackToLibrary" classname="com.biblioteca.BibliotecaAppTest" time="0.122"/>
+  <testcase name="shouldHaveAListOfBooksWhenTheAppIsInitialized" classname="com.biblioteca.BibliotecaAppTest" time="0.0"/>
+  <testcase name="shouldReturnFalseWhenInvalidMovieTitleIsPassed" classname="com.biblioteca.BibliotecaAppTest" time="0.001"/>
+  <testcase name="returnAMovieWhenTitleIsPassed" classname="com.biblioteca.BibliotecaAppTest" time="0.0"/>
+  <testcase name="shouldReturnBookListWhenCategoryIsSpecifiedAsBook" classname="com.biblioteca.BibliotecaAppTest" time="0.0"/>
+  <testcase name="shouldDisplayListOfBooksWhenBookListIsPassed" classname="com.biblioteca.BibliotecaAppTest" time="0.0"/>
+  <testcase name="shouldCheckoutAMovie" classname="com.biblioteca.BibliotecaAppTest" time="0.001"/>
+  <testcase name="shouldThrowExceptionWhenInvalidBookIsReturned" classname="com.biblioteca.BibliotecaAppTest" time="0.002"/>
+  <testcase name="shouldReturnBookBackToLibrary" classname="com.biblioteca.BibliotecaAppTest" time="0.0"/>
+  <testcase name="shouldThrowExceptionWhenInvalidBookIsCheckedOut" classname="com.biblioteca.BibliotecaAppTest" time="0.001"/>
+  <testcase name="shouldThrowExceptionWhenInvalidMovieIsCheckedOut" classname="com.biblioteca.BibliotecaAppTest" time="0.001"/>
+  <testcase name="shouldThrowExceptionWhenInvalidMovieIsReturned" classname="com.biblioteca.BibliotecaAppTest" time="0.001"/>
+  <testcase name="shouldDisplayListOfBorrowedBooks" classname="com.biblioteca.BibliotecaAppTest" time="0.0"/>
+  <testcase name="shouldDisplayWelcomeMessageForMovie" classname="com.biblioteca.BibliotecaAppTest" time="0.001"/>
+  <testcase name="shouldCheckoutABook" classname="com.biblioteca.BibliotecaAppTest" time="0.0"/>
+  <testcase name="shouldHaveAListOfMoviesWhenTheAppIsInitialized" classname="com.biblioteca.BibliotecaAppTest" time="0.0"/>
+  <testcase name="returnABookWhenTitleIsPassed" classname="com.biblioteca.BibliotecaAppTest" time="0.0"/>
+  <testcase name="shouldDisplayMainMenuForBook" classname="com.biblioteca.BibliotecaAppTest" time="0.0"/>
+  <testcase name="shouldDisplayListOfMoviesWhenMovieListIsPassed" classname="com.biblioteca.BibliotecaAppTest" time="0.001"/>
+  <testcase name="shouldDisplayListOfBorrowedMovies" classname="com.biblioteca.BibliotecaAppTest" time="0.0"/>
+  <testcase name="shouldDisplayMainMenuForMovie" classname="com.biblioteca.BibliotecaAppTest" time="0.0"/>
+  <testcase name="shouldReturnFalseWhenInvalidBookTitleIsPassed" classname="com.biblioteca.BibliotecaAppTest" time="0.0"/>
+  <testcase name="shouldDisplayWelcomeMessageForBook" classname="com.biblioteca.BibliotecaAppTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

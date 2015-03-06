@@ -1,6 +1,5 @@
 package com.biblioteca;
-import com.biblioteca.Book;
-import org.junit.Assert;
+import com.biblioteca.core.models.Book;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

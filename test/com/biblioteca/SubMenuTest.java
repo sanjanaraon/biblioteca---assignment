@@ -1,5 +1,8 @@
 package com.biblioteca;
 
+import com.biblioteca.core.controller.LibraryManager;
+import com.biblioteca.core.models.Book;
+import com.biblioteca.security.AccountManager;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -96,7 +99,7 @@ public class SubMenuTest {
         when(bookLibraryManager.displayMainMenu()).thenReturn("main menu");
         Book book1 = new Book("S C J P", "Kathy Serra", 2006);
         when(bookLibraryManager.getItem("S C J P")).thenReturn(book1);
-        when(bookLibraryManager.displaySpecificItemListDetails(list)).thenReturn("books");
+        when(bookLibraryManager.displayItemDetailsInTableForm(list)).thenReturn("books");
         doNothing().when(bookLibraryManager).returnBookToLibrary(book1);
         testReaderWriter.consoleInput("3\nlib-1000\nuser1\nS C J P\n4");
         String expected = "main menuEnter library numberEnter passwordbooksSelect a Item by entering the titleS C J P returned to the librarymain menuSuccessful Exit";

@@ -1,4 +1,7 @@
-package com.biblioteca;
+package com.biblioteca.core.models;
+
+import com.biblioteca.exceptions.InvalidItemException;
+import com.biblioteca.Item;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -100,14 +103,14 @@ public class Library {
 //    }
 
 
-//    public List<Item> getBorrowedItems(){
-//        List<Item> borrowed=new ArrayList<Item>();
-//        for(Item item:itemList){
-//            if(item.isCheckedOut()==true){
-//                borrowed.add(item);
-//            }
-//        }
-//        return borrowed;
-//    }
+    public List<Item> getBorrowedItems(){
+        List<Item> borrowed=new ArrayList<Item>();
+        for(Item item:itemList){
+            if(item.isCheckedOut()==true){
+                borrowed.add(item);
+            }
+        }
+        return borrowed;
+    }
 
 }

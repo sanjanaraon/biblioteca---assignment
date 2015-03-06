@@ -1,6 +1,6 @@
 package com.biblioteca;
 
-import org.junit.Assert;
+import com.biblioteca.core.models.Movie;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

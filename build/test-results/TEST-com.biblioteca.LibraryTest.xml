@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.biblioteca.LibraryTest" tests="18" skipped="0" failures="0" errors="0" timestamp="2015-03-05T12:53:20" hostname="INsanjanar.local" time="0.007">
+  <properties/>
+  <testcase name="shouldFailToRemoveBookWhenTheBookIsAlreadyCheckedOut" classname="com.biblioteca.LibraryTest" time="0.0"/>
+  <testcase name="shouldFailToRemoveBookWhenTheBookDoesNotExistInLibrary" classname="com.biblioteca.LibraryTest" time="0.0"/>
+  <testcase name="shouldAddTheBookReturnedToBookList" classname="com.biblioteca.LibraryTest" time="0.0"/>
+  <testcase name="shouldHaveBookListAndMovieListUponCreation" classname="com.biblioteca.LibraryTest" time="0.0"/>
+  <testcase name="shouldThrowExceptionWhenUnCheckedBookIsAddedToBookList" classname="com.biblioteca.LibraryTest" time="0.0"/>
+  <testcase name="shouldThrowExceptionWhenUnCheckedMovieIsAddedToMovieList" classname="com.biblioteca.LibraryTest" time="0.0"/>
+  <testcase name="shouldAddTheMovieReturnedToMovieList" classname="com.biblioteca.LibraryTest" time="0.0"/>
+  <testcase name="shouldAddOneBookItemToExistingListOfItems" classname="com.biblioteca.LibraryTest" time="0.0"/>
+  <testcase name="shouldThrowAExceptionWhenInvalidBookIsAddedToBooksList" classname="com.biblioteca.LibraryTest" time="0.0"/>
+  <testcase name="shouldReturnListOfBorrowedMoviesToBeReturned" classname="com.biblioteca.LibraryTest" time="0.0"/>
+  <testcase name="shouldCheckOutABook" classname="com.biblioteca.LibraryTest" time="0.0"/>
+  <testcase name="shouldThrowAExceptionWhenInvalidMovieIsAddedToMovieList" classname="com.biblioteca.LibraryTest" time="0.001"/>
+  <testcase name="shouldFailToRemoveMovieWhenTheBookIsAlreadyCheckedOut" classname="com.biblioteca.LibraryTest" time="0.0"/>
+  <testcase name="shouldCheckOutAMovie" classname="com.biblioteca.LibraryTest" time="0.0"/>
+  <testcase name="shouldAddOneMovieItemToExistingListOfItems" classname="com.biblioteca.LibraryTest" time="0.0"/>
+  <testcase name="shouldFailToRemoveMovieWhenTheMovieDoesNotExistInLibrary" classname="com.biblioteca.LibraryTest" time="0.001"/>
+  <testcase name="shouldReturnListOfBorrowedBooksToBeReturned" classname="com.biblioteca.LibraryTest" time="0.0"/>
+  <testcase name="shouldReturnListOfAvailableItemsToBeCheckedOut" classname="com.biblioteca.LibraryTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

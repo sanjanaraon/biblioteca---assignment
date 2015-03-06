@@ -1,4 +1,6 @@
-package com.biblioteca;
+package com.biblioteca.security;
+
+import com.biblioteca.core.models.UserInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,8 +10,6 @@ import java.util.List;
  */
 public class AccountManager {
     List<UserInfo> users=new ArrayList<UserInfo>();
-    String number;
-    String password;
     public AccountManager() {
         this.users = initializeUserDetails();
     }

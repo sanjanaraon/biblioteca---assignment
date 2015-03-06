@@ -1,9 +1,11 @@
-package com.biblioteca;
+package com.biblioteca.core.models;
+
+import com.biblioteca.Item;
 
 /**
  * Created by sanjanar on 25/02/15.
  */
-public class Book implements Item{
+public class Book implements Item {
     private String title;
     private String author;
     private int year;

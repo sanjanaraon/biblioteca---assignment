@@ -1,5 +1,8 @@
 package com.biblioteca;
 
+import com.biblioteca.core.controller.LibraryManager;
+import com.biblioteca.security.AccountManager;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -28,8 +31,6 @@ public class SubMenu {
                 new DisplayDetailsMenuAction(),
                 new CheckOutBookMenuAction(),
                 new ReturnBookMenuAction(),
-                new ExitFromSubMenu(),
-
         };
     }
 
@@ -38,9 +39,10 @@ public class SubMenu {
         do {
             printMessage(app.displayMainMenu(), inputOutput);
             choice = Integer.parseInt(acceptInput(inputOutput));
-            if (choice >= 1 && choice <= 4) menuMap[choice - 1].actionPerformed(app, inputOutput, list, manager);
+            if (choice >= 1 && choice <= 3) menuMap[choice - 1].actionPerformed(app, inputOutput, list, manager);
             else System.out.println("Enter a valid choice");
         } while (choice != 4);
+        inputOutput.writeValue("Successful Exit from Menu");
         return choice;
     }
 

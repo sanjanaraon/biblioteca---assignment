@@ -1,4 +1,4 @@
-package com.biblioteca;
+package com.biblioteca.exceptions;
 
 /**
  * Created by sanjanar on 25/02/15.

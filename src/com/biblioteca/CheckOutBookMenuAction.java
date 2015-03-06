@@ -1,5 +1,10 @@
 package com.biblioteca;
 
+import com.biblioteca.core.controller.LibraryManager;
+import com.biblioteca.core.models.UserInfo;
+import com.biblioteca.exceptions.InvalidItemException;
+import com.biblioteca.security.AccountManager;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -30,12 +35,12 @@ public class CheckOutBookMenuAction implements MenuAction {
 
     private void accessCheckOutMenu(LibraryManager libraryManager, InputOutput readerWriter, List<? extends Item> list) throws IOException {
         printMessage(libraryManager.displaySpecificItemListDetails(list), readerWriter);
-        String title;
-        Item item;
+//        String title;
+//        Item item;
         printMessage("Select a Item by entering the title", readerWriter);
-        title = acceptInput(readerWriter);
+        String title = acceptInput(readerWriter);
         if (libraryManager.validTitle(title)) {
-            item = libraryManager.getItem(title);
+            Item item = libraryManager.getItem(title);
             try {
                 libraryManager.checkOutFromLibrary(item);
                 printMessage(item.getTitle() + " is checked out successfully", readerWriter);
