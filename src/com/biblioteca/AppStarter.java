@@ -1,6 +1,7 @@
 package com.biblioteca;
 
-import com.biblioteca.core.controller.ConsoleApp;
+import com.biblioteca.ui.console.ConsoleReaderWriter;
+import com.biblioteca.ui.controller.ConsoleApp;
 
 /**
  * Created by sanjanar on 27/02/15.
