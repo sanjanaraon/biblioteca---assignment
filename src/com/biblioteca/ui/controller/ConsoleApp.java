@@ -44,13 +44,10 @@ public class ConsoleApp {
         int number;
         firstMessage();
         do {
-            printMessage("Which library you want to use book(1)/movie(2)/Exit(3)\n Enter 0/1/2??");
+            printMessage("Which library you want to use book(1)/movie(2)/Exit(3)\n Enter 1/2/3??");
             number = Integer.parseInt(acceptInput());
-            if (number >= 1 && number <= 2) {
-                subMenuMap[number-1].subMenuActionPerformed(app, inputOutput, manager);
-            } else {
-                printMessage("enter either 0 or 1 or 2");
-            }
+            if (number >= 1 && number <= 2) subMenuMap[number - 1].subMenuActionPerformed(app, inputOutput, manager);
+            else if(number!=3) printMessage("enter either 1 or 2 or 3");
         } while (number!=3);
         inputOutput.writeValue("Successful Exit From Biblioteca App");
     }
