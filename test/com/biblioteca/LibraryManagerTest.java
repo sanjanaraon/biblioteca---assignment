@@ -1,10 +1,7 @@
 package com.biblioteca;
 
 import com.biblioteca.core.exceptions.InvalidItemException;
-import com.biblioteca.core.models.Book;
-import com.biblioteca.core.models.Item;
-import com.biblioteca.core.models.Library;
-import com.biblioteca.core.models.Movie;
+import com.biblioteca.core.models.*;
 import com.biblioteca.ui.controller.LibraryManager;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,12 +19,15 @@ import static org.mockito.Mockito.*;
 public class LibraryManagerTest {
     LibraryManager bookLibraryManager;
      LibraryManager movieLibraryManager;
+    UserInfo user;
+
 
     @Before
     public void setUp() {
 
             bookLibraryManager = new LibraryManager(LibraryManager.createLibraryWithBooks());
             movieLibraryManager = new LibraryManager(LibraryManager.createLibraryWithMovies());
+        user = new UserInfo("lib-1000","user1","anu","anu@ymail.com","8921679023","user");
 
     }
 
@@ -85,12 +85,12 @@ public class LibraryManagerTest {
         Book book1 = new Book("S C J P", "Kathy Serra", 2006);
         Library mockLibrary = mock(Library.class);
 
-        doNothing().when(mockLibrary).checkOutItem(book1);
+        doNothing().when(mockLibrary).checkOutItem(book1, user);
 
         bookLibraryManager = new LibraryManager(mockLibrary);
-        bookLibraryManager.checkOutFromLibrary(book1);
+        bookLibraryManager.checkOutFromLibrary(book1, user);
 
-        verify(mockLibrary).checkOutItem(book1);
+        verify(mockLibrary).checkOutItem(book1, user);
     }
 
     @Test
@@ -98,12 +98,12 @@ public class LibraryManagerTest {
         Movie movie1 = new Movie("Star wars",1977,"George Lucas","9");
         Library mockLibrary = mock(Library.class);
 
-        doNothing().when(mockLibrary).checkOutItem(movie1);
+        doNothing().when(mockLibrary).checkOutItem(movie1, user);
 
         movieLibraryManager = new LibraryManager(mockLibrary);
-        movieLibraryManager.checkOutFromLibrary(movie1);
+        movieLibraryManager.checkOutFromLibrary(movie1, user);
 
-        verify(mockLibrary).checkOutItem(movie1);
+        verify(mockLibrary).checkOutItem(movie1, user);
     }
 
     @Test(expected = InvalidItemException.class)
@@ -111,12 +111,12 @@ public class LibraryManagerTest {
         Book book1 = new Book("S C Q A D", "Kathy Serra", 2006);
         Library mockLibrary = mock(Library.class);
 
-        doThrow(new InvalidItemException()).when(mockLibrary).checkOutItem(book1);
+        doThrow(new InvalidItemException()).when(mockLibrary).checkOutItem(book1, user);
 
         bookLibraryManager = new LibraryManager(mockLibrary);
-        bookLibraryManager.checkOutFromLibrary(book1);
+        bookLibraryManager.checkOutFromLibrary(book1, user);
 
-        verify(mockLibrary).checkOutItem(book1);
+        verify(mockLibrary).checkOutItem(book1, user);
     }
 
     @Test(expected = InvalidItemException.class)
@@ -125,12 +125,12 @@ public class LibraryManagerTest {
 
         Library mockLibrary = mock(Library.class);
 
-        doThrow(new InvalidItemException()).when(mockLibrary).checkOutItem(movie1);
+        doThrow(new InvalidItemException()).when(mockLibrary).checkOutItem(movie1, user);
 
         movieLibraryManager = new LibraryManager(mockLibrary);
-        movieLibraryManager.checkOutFromLibrary(movie1);
+        movieLibraryManager.checkOutFromLibrary(movie1, user);
 
-        verify(mockLibrary).checkOutItem(movie1);
+        verify(mockLibrary).checkOutItem(movie1, user);
     }
 
     @Test
@@ -138,12 +138,12 @@ public class LibraryManagerTest {
         Book book1 = new Book("S C J P", "Kathy Serra", 2006);
         Library mockLibrary = mock(Library.class);
 
-        doNothing().when(mockLibrary).returnItem(book1);
+        doNothing().when(mockLibrary).returnItem(book1,user);
 
         bookLibraryManager = new LibraryManager(mockLibrary);
-        bookLibraryManager.returnBookToLibrary(book1);
+        bookLibraryManager.returnBookToLibrary(book1, user);
 
-        verify(mockLibrary).returnItem(book1);
+        verify(mockLibrary).returnItem(book1,user);
     }
 
     @Test
@@ -151,12 +151,12 @@ public class LibraryManagerTest {
         Movie movie1 = new Movie("Star wars",1977,"George Lucas","9");
         Library mockLibrary = mock(Library.class);
 
-        doNothing().when(mockLibrary).returnItem(movie1);
+        doNothing().when(mockLibrary).returnItem(movie1,user);
 
         movieLibraryManager = new LibraryManager(mockLibrary);
-        movieLibraryManager.returnBookToLibrary(movie1);
+        movieLibraryManager.returnBookToLibrary(movie1, user);
 
-        verify(mockLibrary).returnItem(movie1);
+        verify(mockLibrary).returnItem(movie1,user);
     }
 
     @Test(expected = InvalidItemException.class)
@@ -164,12 +164,12 @@ public class LibraryManagerTest {
         Book book1 = new Book("S C J P", "Kathy Serra", 2006);
         Library mocklibrary = mock(Library.class);
 
-        doThrow(new InvalidItemException()).when(mocklibrary).returnItem(book1);
+        doThrow(new InvalidItemException()).when(mocklibrary).returnItem(book1,user);
 
         bookLibraryManager = new LibraryManager(mocklibrary);
-        bookLibraryManager.returnBookToLibrary(book1);
+        bookLibraryManager.returnBookToLibrary(book1, user);
 
-        verify(mocklibrary).returnItem(book1);
+        verify(mocklibrary).returnItem(book1,user);
     }
 
     @Test(expected = InvalidItemException.class)
@@ -178,12 +178,12 @@ public class LibraryManagerTest {
 
         Library mocklibrary = mock(Library.class);
 
-        doThrow(new InvalidItemException()).when(mocklibrary).returnItem(movie1);
+        doThrow(new InvalidItemException()).when(mocklibrary).returnItem(movie1,user);
 
         movieLibraryManager = new LibraryManager(mocklibrary);
-        movieLibraryManager.returnBookToLibrary(movie1);
+        movieLibraryManager.returnBookToLibrary(movie1, user);
 
-        verify(mocklibrary).returnItem(movie1);
+        verify(mocklibrary).returnItem(movie1,user);
     }
 
     @Test
@@ -199,7 +199,7 @@ public class LibraryManagerTest {
     @Test
     public void shouldDisplayListOfBorrowedBooks() throws Exception {
         Book book1 = new Book("S C J P", "Kathy Serra", 2006);
-        bookLibraryManager.checkOutFromLibrary(book1);
+        bookLibraryManager.checkOutFromLibrary(book1, user);
         List<Item> list = bookLibraryManager.getItemListByCategory("book");
         assertEquals(Arrays.asList(book1), bookLibraryManager.borrowedItems(list));
     }
@@ -207,7 +207,7 @@ public class LibraryManagerTest {
     @Test
     public void shouldDisplayListOfBorrowedMovies() throws Exception {
         Movie movie1 = new Movie("Star wars",1977,"George Lucas","9");
-        movieLibraryManager.checkOutFromLibrary(movie1);
+        movieLibraryManager.checkOutFromLibrary(movie1, user);
         List<Item> list=movieLibraryManager.getItemListByCategory("movie");
        assertEquals(Arrays.asList(movie1), movieLibraryManager.borrowedItems(list));
     }
