@@ -25,16 +25,6 @@ public class AccountManagerTest {
     }
 
     @Test
-    public void shouldLoginWithProperCredentials() throws Exception {
-        assertTrue(manager.login("lib-1000", "user1"));
-    }
-
-    @Test
-    public void shouldNotLoginWithInValidCredentials() throws Exception {
-        assertFalse(manager.login("lib-1010", "user"));
-    }
-
-    @Test
     public void shouldCheckIfAnyoneIsLoggedIn() throws Exception {
         UserInfo userInfo = manager.users.get(0);
         userInfo.setLoggedIn(true);
@@ -47,8 +37,10 @@ public class AccountManagerTest {
     }
 
     @Test
-    public void shouldAcceptInputAndLogin() throws Exception {
-        LibraryManager libraryManager=new LibraryManager();
-        //assertTrue(manager.checkCredentialsAndReturnUser("lib-1000", "user1", libraryManager));
+    public void shouldLogOutALoggedInUser() throws Exception {
+        UserInfo userInfo=manager.users.get(0);
+        userInfo.setLoggedIn(true);
+        manager.logOut(userInfo);
+        assertFalse(userInfo.isLoggedIn());
     }
 }
