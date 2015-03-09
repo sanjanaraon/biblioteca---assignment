@@ -1,5 +1,6 @@
 package com.biblioteca.ui.menuaction;
 
+import com.biblioteca.core.models.UserInfo;
 import com.biblioteca.ui.console.InputOutput;
 //import com.biblioteca.TestReaderWriter;
 import com.biblioteca.core.models.Item;
@@ -16,6 +17,7 @@ public class SubMenu {
     MenuAction[] menuMap;
     InputOutput inputOutput;
     LibraryManager libraryManager;
+
 
     public SubMenu(InputOutput inputOutput) {
         this.inputOutput = inputOutput;
@@ -37,16 +39,22 @@ public class SubMenu {
         };
     }
 
-    public int menu(List<? extends Item> list, LibraryManager app, InputOutput inputOutput, AccountManager manager) throws IOException {
+    public void menu(List<? extends Item> list, LibraryManager app, InputOutput inputOutput, AccountManager manager) throws IOException {
         int choice;
+
         do {
             printMessage(app.displayMainMenu(), inputOutput);
             choice = Integer.parseInt(acceptInput(inputOutput));
-            if (choice >= 1 && choice <= 3) menuMap[choice - 1].actionPerformed(app, inputOutput, list, manager);
-            else printMessage("Enter a valid choice",inputOutput);
+            if (choice >= 1 && choice <= 3) {
+                menuMap[choice - 1].actionPerformed(app, inputOutput, list, manager,manager.checkForLoggedInUser());
+            }
+            else if(choice!=4)printMessage("Enter a valid choice", inputOutput);
         } while (choice != 4);
         inputOutput.writeValue("Successful Exit from Menu");
-        return choice;
+        printMessage("Do you want to log out?? \nYes(1) No(0)",inputOutput);
+        choice= Integer.parseInt(acceptInput(inputOutput));
+        if(choice==1) manager.logOut(manager.checkForLoggedInUser());
+        printMessage("User logged out",inputOutput);
     }
 
     public void printMessage(String message, InputOutput inputOutput) throws IOException {
