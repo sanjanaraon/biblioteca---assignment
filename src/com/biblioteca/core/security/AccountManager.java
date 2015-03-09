@@ -51,13 +51,17 @@ public class AccountManager {
         List<UserInfo> users= getUserDetails();
         for(UserInfo user:users){
             if(user.getLibraryNumber().equals(libraryNumber) && user.getPassword().equals(pswd)){
-                if(user.getCategory()=="librarian"){
-                    manager.generateReport();
-                }
+//                if(user.getCategory()=="librarian"){
+//                    manager.generateReport();
+//                }
                 user.setLoggedIn(true);
                 return user;
             }
         }
         return null;
+    }
+
+    public void logOut(UserInfo userInfo) {
+        userInfo.setLoggedIn(false);
     }
 }
