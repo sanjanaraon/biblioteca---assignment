@@ -85,7 +85,7 @@ public class Library {
     public List<Item> getAvailableItems() {
         List<Item> availableBook=new ArrayList<Item>();
         for(Item item:itemList){
-            if(item.isCheckedOut()==false){
+            if(!item.isCheckedOut()){
                 availableBook.add(item);
             }
         }
