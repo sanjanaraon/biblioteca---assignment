@@ -11,6 +11,17 @@ public class Movie implements Item {
     private String rating;
     private boolean checkedOut;
     private String category;
+    private String borrower;
+
+    @Override
+    public String getBorrower() {
+        return borrower;
+    }
+
+    @Override
+    public void setBorrower(String borrower) {
+        this.borrower=borrower;
+    }
 
     public Movie(String name, int year, String director, String rating) {
         this.title = name;
