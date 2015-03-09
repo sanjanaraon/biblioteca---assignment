@@ -39,16 +39,9 @@ public class UserInfo {
         return password;
     }
 
-    public String getName() {
-        return name;
-    }
 
     public String getEmail() {
         return email;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
     }
 
     public void setLoggedIn(boolean loggedIn) {
