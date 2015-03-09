@@ -2,6 +2,7 @@ package com.biblioteca;
 
 import com.biblioteca.core.models.UserInfo;
 import com.biblioteca.core.security.AccountManager;
+import com.biblioteca.ui.controller.LibraryManager;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -37,7 +38,7 @@ public class AccountManagerTest {
     public void shouldCheckIfAnyoneIsLoggedIn() throws Exception {
         UserInfo userInfo = manager.users.get(0);
         userInfo.setLoggedIn(true);
-        assertEquals(new UserInfo("lib-1000", "user1", "anu", "anu@ymail.com", "8921679023"), manager.checkForLoggedInUser());
+        assertEquals(new UserInfo("lib-1000", "user1", "anu", "anu@ymail.com", "8921679023","user"), manager.checkForLoggedInUser());
     }
 
     @Test
@@ -47,6 +48,7 @@ public class AccountManagerTest {
 
     @Test
     public void shouldAcceptInputAndLogin() throws Exception {
-        assertTrue(manager.checkCredentials("lib-1000", "user1"));
+        LibraryManager libraryManager=new LibraryManager();
+        //assertTrue(manager.checkCredentialsAndReturnUser("lib-1000", "user1", libraryManager));
     }
 }
