@@ -1,4 +1,4 @@
-package com.biblioteca;
+package com.biblioteca.core.security;
 
 import com.biblioteca.core.models.UserInfo;
 import com.biblioteca.core.security.AccountManager;
@@ -38,7 +38,7 @@ public class AccountManagerTest {
     public void shouldCheckIfAnyoneIsLoggedIn() throws Exception {
         UserInfo userInfo = manager.users.get(0);
         userInfo.setLoggedIn(true);
-        assertEquals(new UserInfo("lib-1000", "user1", "anu", "anu@ymail.com", "8921679023","user"), manager.checkForLoggedInUser());
+        assertEquals(new UserInfo("lib-1000", "user1", "anu", "anu@ymail.com", "8921679023", "user"), manager.checkForLoggedInUser());
     }
 
     @Test
