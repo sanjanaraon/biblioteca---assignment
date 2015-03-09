@@ -1,8 +1,6 @@
 package com.biblioteca.ui.controller;
 
-import com.biblioteca.TestReaderWriter;
-import com.biblioteca.ui.controller.ConsoleApp;
-import com.biblioteca.ui.controller.LibraryManager;
+import com.biblioteca.ui.console.TestReaderWriter;
 import org.junit.Before;
 import org.junit.Test;
 
