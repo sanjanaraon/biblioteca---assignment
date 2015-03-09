@@ -77,19 +77,19 @@ public class ConsoleAppTest {
 
     }
 
-//    @Test
-//    public void testForMainMenu() throws Exception {
-//        LibraryManager mockBiblioteca = mock(LibraryManager.class);
-//        consoleApp=new ConsoleApp(testReaderWriter,mockBiblioteca);
-//        when(mockBiblioteca.displayWelcomeMessage()).thenReturn("Welcome to Biblioteca ");
-//        when(mockBiblioteca.displayMainMenu()).thenReturn("main menu ");
-//        String excepted = "Welcome to Biblioteca Which library you want to use book(0)/movie(1)/Exit(2)\n" +
-//                " Enter 0/1/2??main menu Successful ExitWhich library you want to use book(0)/movie(1)/Exit(2)\n" +
-//                " Enter 0/1/2??";
-//        testReaderWriter.consoleInput("0\n4\n2");
-//
-//        consoleApp.mainMenu();
-//
-//        assertEquals(excepted, testReaderWriter.consoleOutput());
-//    }
+    @Test
+    public void testForMainMenu() throws Exception {
+        LibraryManager mockBiblioteca = mock(LibraryManager.class);
+        consoleApp=new ConsoleApp(testReaderWriter,mockBiblioteca);
+        when(mockBiblioteca.displayWelcomeMessage()).thenReturn("Welcome to Biblioteca ");
+        when(mockBiblioteca.displayMainMenu()).thenReturn("main menu ");
+        String excepted = "Welcome to Biblioteca Which library you want to use book(1)/movie(2)/Exit(3)\n" +
+                " Enter 1/2/3??main menu Successful Exit from MenuWhich library you want to use book(1)/movie(2)/Exit(3)\n" +
+                " Enter 1/2/3??Successful Exit From Biblioteca App";
+        testReaderWriter.consoleInput("1\n4\n3");
+
+        consoleApp.mainMenu();
+
+        assertEquals(excepted, testReaderWriter.consoleOutput());
+    }
 }
