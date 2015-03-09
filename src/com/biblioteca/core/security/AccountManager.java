@@ -28,16 +28,6 @@ public class AccountManager {
         return users;
     }
 
-    public boolean login(String libraryNumber, String password) {
-        for(UserInfo user:users){
-            if(user.getLibraryNumber().equals(libraryNumber) && user.getPassword().equals(password)){
-                user.setLoggedIn(true);
-                return true;
-            }
-        }
-        return false;
-    }
-
     public UserInfo checkForLoggedInUser() {
         for (UserInfo user:users){
             if(user.isLoggedIn()==true){
@@ -51,9 +41,6 @@ public class AccountManager {
         List<UserInfo> users= getUserDetails();
         for(UserInfo user:users){
             if(user.getLibraryNumber().equals(libraryNumber) && user.getPassword().equals(pswd)){
-//                if(user.getCategory()=="librarian"){
-//                    manager.generateReport();
-//                }
                 user.setLoggedIn(true);
                 return user;
             }
