@@ -14,29 +14,32 @@ import java.util.List;
  * Created by sanjanar on 02/03/15.
  */
 public class ReturnBookMenuAction implements MenuAction {
+
     AccountManager manager = new AccountManager();
 
     @Override
-    public void actionPerformed(LibraryManager libraryManager, InputOutput readerWriter, List<? extends Item> list, AccountManager manager)
+    public UserInfo actionPerformed(LibraryManager libraryManager, InputOutput readerWriter, List<? extends Item> list, AccountManager manager,UserInfo user)
             throws IOException {
         UserInfo loggedInUser = manager.checkForLoggedInUser();
-        if (loggedInUser != null) {
-            accessReturnItem(libraryManager, readerWriter, list);
+
+        if (loggedInUser != null ) {
+            accessReturnItem(libraryManager, readerWriter, list, user);
         } else {
             printMessage("Enter library number", readerWriter);
             String number = acceptInput(readerWriter);
             printMessage("Enter password", readerWriter);
             String pswd = acceptInput(readerWriter);
-            if (manager.checkCredentials(number, pswd)) {
-                accessReturnItem(libraryManager, readerWriter, list);
+            user = manager.checkCredentialsAndReturnUser(number, pswd, libraryManager);
+            if (user!=null) {
+                accessReturnItem(libraryManager, readerWriter, list,user);
             } else {
                 printMessage("Not a valid user", readerWriter);
-                return;
             }
         }
+                return user;
     }
 
-    private void accessReturnItem(LibraryManager libraryManager, InputOutput readerWriter, List<? extends Item> list) throws IOException {
+    private void accessReturnItem(LibraryManager libraryManager, InputOutput readerWriter, List<? extends Item> list, UserInfo user) throws IOException {
         List<Item> borrowedItem=libraryManager.borrowedItems(list);
         printMessage(libraryManager.displayItemDetailsInTableForm(borrowedItem), readerWriter);
         printMessage("Select a Item by entering the title", readerWriter);
@@ -44,7 +47,14 @@ public class ReturnBookMenuAction implements MenuAction {
         title = acceptInput(readerWriter);
         Item book = libraryManager.getItem(title);
         try {
-            libraryManager.returnBookToLibrary(book);
+            libraryManager.returnBookToLibrary(book,user);
+            if(user.getCategory().equals("librarian")){
+                printMessage("do you want to see the report yes(1)/no(0)",readerWriter);
+                int choice= Integer.parseInt(acceptInput(readerWriter));
+                if(choice==1){
+                    printMessage(libraryManager.generateReport(),readerWriter);
+                }
+            }
             printMessage(book.getTitle() + " returned to the library", readerWriter);
         } catch (InvalidItemException e) {
             System.out.println("That is a invalid Item");
