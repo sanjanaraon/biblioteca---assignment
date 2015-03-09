@@ -11,13 +11,20 @@ public class UserInfo {
     private String phoneNumber;
     private boolean loggedIn;
 
-    public UserInfo(String libraryNumber, String password, String name, String email, String phoneNumber) {
+    public String getCategory() {
+        return category;
+    }
+
+    private String category;
+
+    public UserInfo(String libraryNumber, String password, String name, String email, String phoneNumber, String category) {
         this.libraryNumber = libraryNumber;
         this.password = password;
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.loggedIn = false;
+        this.category = category;
     }
 
     public boolean isLoggedIn() {
@@ -50,12 +57,10 @@ public class UserInfo {
 
     @Override
     public boolean equals(Object o) {
-        UserInfo newUser = (UserInfo) o;
-        if (this.libraryNumber == newUser.libraryNumber && this.password == newUser.password &&
-                this.name == newUser.name && this.email == newUser.email && this.phoneNumber == newUser.phoneNumber){
-            return true;
-        }
-            return false;
+       UserInfo newUser=(UserInfo)o;
+        if(this.libraryNumber.equals(newUser.libraryNumber) && this.password==newUser.password && this.name==newUser.name && this.email.equals(newUser.email)
+                && this.phoneNumber.equals(newUser.phoneNumber) && this.category.equals(newUser.category)) return true;
+        return false;
     }
 
 }
