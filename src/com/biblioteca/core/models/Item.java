@@ -26,4 +26,8 @@ public interface Item {
     String getAuthor();
 
     String getCategory();
+
+    String getBorrower();
+
+    void setBorrower(String borrower);
 }
