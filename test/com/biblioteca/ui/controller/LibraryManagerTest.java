@@ -2,6 +2,7 @@ package com.biblioteca.ui.controller;
 
 import com.biblioteca.core.exceptions.InvalidItemException;
 import com.biblioteca.core.models.*;
+import com.biblioteca.core.security.AccountManager;
 import com.biblioteca.ui.controller.LibraryManager;
 import org.junit.Before;
 import org.junit.Test;
@@ -236,7 +237,7 @@ public class LibraryManagerTest {
     public void shouldDisplayListOfBooksWhenBookListIsPassed() throws Exception {
         List<Item> bookList= bookLibraryManager.getItemListByCategory("book");
         String excepted=displayItemsInString(bookList);
-        assertEquals(excepted, bookLibraryManager.displaySpecificItemListDetails(bookList));
+        assertEquals(excepted, bookLibraryManager.displayItemDetails(bookList));
     }
 
     @Test
@@ -281,10 +282,24 @@ public class LibraryManagerTest {
         return result;
     }
 
+//    @Test
+//    public void shouldDisplayListOfBooksInTableForm() throws Exception {
+//        List<Item> books=bookLibraryManager.getItemListByCategory("book");
+//        bookLibraryManager.displayItemDetailsInTableForm(books);
+//    }
+
+
     @Test
-    public void shouldDisplayListOfBooksInTableForm() throws Exception {
-        List<Item> books=bookLibraryManager.getItemListByCategory("book");
-        bookLibraryManager.displayItemDetailsInTableForm(books);
+    public void testForGenerateReportWhenAUserIsLoggedIn() throws Exception {
+        String expected="checked out listanu@ymail.com\n";
+        AccountManager manager=new AccountManager();
+        UserInfo userInfo=manager.users.get(0);
+        userInfo.setLoggedIn(true);
+        Item book=bookLibraryManager.getItem("S C J P");
+        book.setCheckedOut(true);
+        book.setBorrower(userInfo.getEmail());
+
+        assertEquals(expected, bookLibraryManager.generateReport());
     }
 }
 
