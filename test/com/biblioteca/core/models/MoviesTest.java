@@ -1,4 +1,4 @@
-package com.biblioteca;
+package com.biblioteca.core.models;
 
 import com.biblioteca.core.models.Movie;
 import org.junit.Test;

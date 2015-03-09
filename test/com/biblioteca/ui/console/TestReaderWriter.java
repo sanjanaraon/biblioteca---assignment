@@ -1,4 +1,4 @@
-package com.biblioteca;
+package com.biblioteca.ui.console;
 
 import com.biblioteca.ui.console.InputOutput;
 

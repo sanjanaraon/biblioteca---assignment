@@ -1,4 +1,4 @@
-package com.biblioteca;
+package com.biblioteca.ui.controller;
 
 import com.biblioteca.core.exceptions.InvalidItemException;
 import com.biblioteca.core.models.*;

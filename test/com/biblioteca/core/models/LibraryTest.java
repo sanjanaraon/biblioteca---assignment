@@ -1,4 +1,4 @@
-package com.biblioteca;
+package com.biblioteca.core.models;
 
 import com.biblioteca.core.exceptions.InvalidItemException;
 import com.biblioteca.core.models.*;

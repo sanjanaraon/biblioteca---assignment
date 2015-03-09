@@ -16,41 +16,48 @@ import java.util.List;
 public class CheckOutBookMenuAction implements MenuAction {
 
     @Override
-    public void actionPerformed(LibraryManager libraryManager, InputOutput readerWriter, List<? extends Item> list, AccountManager manager)
+    public UserInfo actionPerformed(LibraryManager libraryManager, InputOutput readerWriter, List<? extends Item> list, AccountManager manager,UserInfo user)
             throws IOException {
         UserInfo loggedInUser = manager.checkForLoggedInUser();
-        if (loggedInUser != null) {
-            accessCheckOutMenu(libraryManager, readerWriter, list);
+        if (loggedInUser != null ) {
+            accessCheckOutMenu(libraryManager, readerWriter, list,user);
         } else {
             printMessage("Enter library number", readerWriter);
             String number = acceptInput(readerWriter);
             printMessage("Enter password", readerWriter);
             String pswd = acceptInput(readerWriter);
-            if (manager.checkCredentials(number, pswd)) {
-                accessCheckOutMenu(libraryManager, readerWriter, list);
+            user = manager.checkCredentialsAndReturnUser(number, pswd, libraryManager);
+            if (user !=null) {
+                accessCheckOutMenu(libraryManager, readerWriter, list, user);
             } else {
                 printMessage("Not a valid user", readerWriter);
-                return;
             }
         }
+                return user;
     }
 
-    private void accessCheckOutMenu(LibraryManager libraryManager, InputOutput readerWriter, List<? extends Item> list) throws IOException {
+    private void accessCheckOutMenu(LibraryManager libraryManager, InputOutput readerWriter, List<? extends Item> list, UserInfo user) throws IOException {
         printMessage(libraryManager.displaySpecificItemListDetails(list), readerWriter);
-//        String title;
-//        Item item;
         printMessage("Select a Item by entering the title", readerWriter);
         String title = acceptInput(readerWriter);
         if (libraryManager.validTitle(title)) {
             Item item = libraryManager.getItem(title);
             try {
-                libraryManager.checkOutFromLibrary(item);
+                System.out.println(user);
+                libraryManager.checkOutFromLibrary(item,user);
                 printMessage(item.getTitle() + " is checked out successfully", readerWriter);
             } catch (InvalidItemException e) {
                 System.out.println("The item can't be checked out as it is already checked out");
             }
         } else {
             printMessage("There seems to be a mistake in the title ", readerWriter);
+        }
+        if(user.getCategory().equals("librarian")){
+            printMessage("do you want to see the report yes(1)/no(0)",readerWriter);
+            int choice= Integer.parseInt(acceptInput(readerWriter));
+            if(choice==1){
+                printMessage(libraryManager.generateReport(),readerWriter);
+            }
         }
     }
 

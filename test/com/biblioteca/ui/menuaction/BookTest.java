@@ -1,4 +1,4 @@
-package com.biblioteca;
+package com.biblioteca.ui.menuaction;
 import com.biblioteca.core.models.Book;
 import org.junit.Test;
 
