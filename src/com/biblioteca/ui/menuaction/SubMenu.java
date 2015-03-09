@@ -42,19 +42,24 @@ public class SubMenu {
     public void menu(List<? extends Item> list, LibraryManager app, InputOutput inputOutput, AccountManager manager) throws IOException {
         int choice;
 
+        UserInfo user = manager.checkForLoggedInUser();
         do {
             printMessage(app.displayMainMenu(), inputOutput);
             choice = Integer.parseInt(acceptInput(inputOutput));
             if (choice >= 1 && choice <= 3) {
-                menuMap[choice - 1].actionPerformed(app, inputOutput, list, manager,manager.checkForLoggedInUser());
-            }
-            else if(choice!=4)printMessage("Enter a valid choice", inputOutput);
+              user=  menuMap[choice - 1].actionPerformed(app, inputOutput, list, manager, user);
+            } else if (choice != 4) printMessage("Enter a valid choice", inputOutput);
         } while (choice != 4);
         inputOutput.writeValue("Successful Exit from Menu");
-        printMessage("Do you want to log out?? \nYes(1) No(0)",inputOutput);
-        choice= Integer.parseInt(acceptInput(inputOutput));
-        if(choice==1) manager.logOut(manager.checkForLoggedInUser());
-        printMessage("User logged out",inputOutput);
+        if (user != null) {
+            printMessage("Do you want to log out?? \nYes(1) No(0)", inputOutput);
+            choice = Integer.parseInt(acceptInput(inputOutput));
+            if (choice == 1) {
+                manager.logOut(user);
+                printMessage("User logged out", inputOutput);
+            }
+
+        }
     }
 
     public void printMessage(String message, InputOutput inputOutput) throws IOException {
