@@ -1,9 +1,6 @@
 package com.biblioteca.ui.controller;
 
-import com.biblioteca.core.models.Item;
-import com.biblioteca.core.models.Book;
-import com.biblioteca.core.models.Library;
-import com.biblioteca.core.models.Movie;
+import com.biblioteca.core.models.*;
 import com.biblioteca.core.exceptions.InvalidItemException;
 
 import java.util.ArrayList;
@@ -80,12 +77,12 @@ public class LibraryManager {
     }
 
 
-    public void checkOutFromLibrary(Item item) throws InvalidItemException {
-        library.checkOutItem(item);
+    public void checkOutFromLibrary(Item item, UserInfo user) throws InvalidItemException {
+        library.checkOutItem(item,user);
     }
 
-    public void returnBookToLibrary(Item item) throws InvalidItemException {
-        library.returnItem(item);
+    public void returnBookToLibrary(Item item, UserInfo user) throws InvalidItemException {
+        library.returnItem(item,user);
     }
 
     public Item getItem(String title) {
@@ -172,6 +169,17 @@ public class LibraryManager {
             result+="| Book Title                                          | Book Author                           | Year Of Publish          |\n";
         }
         result += "|" + item.getTitle() + "                             |" + item.getAuthor() + "                |" + item.getYear() + "   |\n";
+        return result;
+    }
+
+    public String generateReport() {
+        String result="";
+        for(Item item:library.itemList){
+                result+="checked out list";
+            if(item.isCheckedOut()==true){
+                result+=item.getBorrower();
+            }
+        }
         return result;
     }
 }
