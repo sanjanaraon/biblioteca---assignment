@@ -1,10 +1,7 @@
 package com.biblioteca;
 
 import com.biblioteca.core.exceptions.InvalidItemException;
-import com.biblioteca.core.models.Book;
-import com.biblioteca.core.models.Item;
-import com.biblioteca.core.models.Library;
-import com.biblioteca.core.models.Movie;
+import com.biblioteca.core.models.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,11 +21,13 @@ import static org.junit.Assert.assertThat;
 public class LibraryTest {
     Library library;
     //Library library1;
-
+UserInfo user;
     @Before
     public void setUp(){
         this.library = new Library();
-     //   library1 = BibliotecaApp.createLibraryWithMovies();
+        user = new UserInfo("lib-1000","user1","anu","anu@ymail.com","8921679023","user");
+
+        //   library1 = BibliotecaApp.createLibraryWithMovies();
     }
 
     @Test
@@ -57,7 +56,7 @@ public class LibraryTest {
         Book book2 = new Book("Let us C", "Yeshwanth", 2000);
         library.addItem(book2);
         Book book3=new Book("S C Q T", "Kathy Serra", 2006);
-        library.checkOutItem(book3);
+        library.checkOutItem(book3, user);
     }
 
     @Test(expected = InvalidItemException.class)
@@ -67,7 +66,7 @@ public class LibraryTest {
         Movie movie2 = new Movie("The Terminator",1984,"James Cameron","8");
         library.addItem(movie2);
         Movie movie3=new Movie("Stars aaa",1977,"George Lucas","9");
-        library.checkOutItem(movie3);
+        library.checkOutItem(movie3, user);
     }
 
     @Test(expected = InvalidItemException.class)
@@ -75,7 +74,7 @@ public class LibraryTest {
         Book book1 = new Book("S C J P", "Kathy Serra", 2006);
         library.addItem(book1);
         book1.setCheckedOut(true);
-        library.checkOutItem(book1);
+        library.checkOutItem(book1, user);
     }
 
     @Test(expected = InvalidItemException.class)
@@ -83,7 +82,7 @@ public class LibraryTest {
         Movie movie1 = new Movie("Star wars",1977,"George Lucas","9");
         library.addItem(movie1);
         movie1.setCheckedOut(true);
-        library.checkOutItem(movie1);
+        library.checkOutItem(movie1, user);
     }
 
     @Test
@@ -91,7 +90,7 @@ public class LibraryTest {
         Book book2 = new Book("Let us C", "Yeshwanth", 2000);
       //  library.addItem(book2);
         book2.setCheckedOut(true);
-        library.returnItem(book2);
+        library.returnItem(book2,user);
         assertEquals(library.getItems(), library.getAvailableItems());
 
     }
@@ -100,7 +99,7 @@ public class LibraryTest {
     public void shouldAddTheMovieReturnedToMovieList() throws Exception {
         Movie movie1 = new Movie("Star wars",1977,"George Lucas","9");
         movie1.setCheckedOut(true);
-        library.returnItem(movie1);
+        library.returnItem(movie1,user);
         assertEquals(library.getItems(),library.getAvailableItems());
 
     }
@@ -145,7 +144,7 @@ public class LibraryTest {
         //assertEquals(expected,library.getBorrowedItems());
         assertThat(library.getBorrowedItems(), is(Arrays.<Item>asList()));
       //  book2.setCheckedOut(true);
-        library.checkOutItem(book2);
+        library.checkOutItem(book2, user);
        // List<Item> expected=getTempList(book2);
         assertThat(library.getBorrowedItems(), is(Arrays.<Item>asList(book2)));
        // assertEquals(expected,library.getBorrowedItems(books));
@@ -157,7 +156,7 @@ public class LibraryTest {
         List<Item> expected=getTempList();
         assertEquals(expected, library.getBorrowedItems());
         //assertThat(library.getBorrowedItems(), is(Arrays.<Item>asList()));
-        library.checkOutItem(movie2);
+        library.checkOutItem(movie2, user);
         expected=getTempList(movie2);
        // assertThat(library.getBorrowedItems(), is(Arrays.<Item>asList(book2)));
         assertEquals(expected, library.getBorrowedItems());
@@ -180,7 +179,7 @@ public class LibraryTest {
     @Test
     public void shouldReturnListOfAvailableItemsWhenAItemIsCheckedOut() throws Exception {
         Movie movie1 = new Movie("Star wars",1977,"George Lucas","9");
-        library.checkOutItem(movie1);
+        library.checkOutItem(movie1, user);
         Book book1 = new Book("S C J P", "Kathy Serra", 2006);
         Book book2 = new Book("Let us C", "Yeshwanth", 2000);
         Book book3 = new Book("The art of computer programming", "Donald ", 1968);
