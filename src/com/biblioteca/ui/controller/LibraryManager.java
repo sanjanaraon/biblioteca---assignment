@@ -174,10 +174,10 @@ public class LibraryManager {
 
     public String generateReport() {
         String result="";
-        for(Item item:library.itemList){
                 result+="checked out list";
+        for(Item item:library.itemList){
             if(item.isCheckedOut()==true){
-                result+=item.getBorrower();
+                result+=item.getBorrower()+"\n";
             }
         }
         return result;
