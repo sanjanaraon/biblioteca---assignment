@@ -43,8 +43,9 @@ public class SubMenuTest {
         subMenu =new SubMenu(testReaderWriter, bookLibraryManager);
         when(bookLibraryManager.displayMainMenu()).thenReturn("Main menu ");
         when(bookLibraryManager.displayItemDetails(list)).thenReturn("Book Details ");
-        testReaderWriter.consoleInput("1\n4");
-        String expected = "Main menu Items available for borrowingBook Details Main menu Successful Exit from Menu";
+        testReaderWriter.consoleInput("1\n4\n0");
+        String expected = "Main menu Items available for borrowingBook Details Main menu Successful Exit from MenuDo you want to log out?? \n" +
+                "Yes(1) No(0)User logged out";
        subMenu.menu(list, bookLibraryManager, testReaderWriter, manager);
         assertEquals(expected, testReaderWriter.consoleOutput());
 
@@ -64,9 +65,10 @@ public class SubMenuTest {
         when(bookLibraryManager.validTitle("S C J P")).thenReturn(true);
         when(bookLibraryManager.getItem("S C J P")).thenReturn(book);
         doNothing().when(bookLibraryManager).checkOutFromLibrary(book, user);
-        testReaderWriter.consoleInput("2\nlib-1000\nuser1\nS C J P\n4");
+        testReaderWriter.consoleInput("2\nlib-1000\nuser1\nS C J P\n4\n1");
 
-        String expected = "Main menu Enter library numberEnter passwordBook Details Select a Item by entering the titleS C J P is checked out successfullyMain menu Successful Exit from Menu";
+        String expected = "Main menu Enter library numberEnter passwordBook Details Select a Item by entering the titleS C J P is checked out successfullyMain menu Successful Exit from MenuDo you want to log out?? \n" +
+                "Yes(1) No(0)User logged out";
 
         subMenu.menu(bookLibraryManager.getItemListByCategory("book"), bookLibraryManager,testReaderWriter, manager);
 
@@ -83,9 +85,10 @@ public class SubMenuTest {
         when(bookLibraryManager.displayMainMenu()).thenReturn("Main menu ");
         when(bookLibraryManager.displaySpecificItemListDetails(list)).thenReturn("Book Details ");
         when(bookLibraryManager.validTitle("S C J P")).thenReturn(true);
-        testReaderWriter.consoleInput("2\nlib-1001\nasds\n4");
+        testReaderWriter.consoleInput("2\nlib-1001\nasds\n4\n0");
 
-        String expected = "Main menu Enter library numberEnter passwordNot a valid userMain menu Successful Exit from Menu";
+        String expected = "Main menu Enter library numberEnter passwordNot a valid userMain menu Successful Exit from MenuDo you want to log out?? \n" +
+                "Yes(1) No(0)User logged out";
 
         subMenu.menu(list, bookLibraryManager,testReaderWriter, manager);
 
@@ -106,8 +109,9 @@ public class SubMenuTest {
         when(bookLibraryManager.getItem("S C J P")).thenReturn(book1);
         when(bookLibraryManager.displayItemDetailsInTableForm(list)).thenReturn("books");
         doNothing().when(bookLibraryManager).returnBookToLibrary(book1, user);
-        testReaderWriter.consoleInput("3\nlib-1000\nuser1\nS C J P\n4");
-        String expected = "main menuEnter library numberEnter passwordbooksSelect a Item by entering the titleS C J P returned to the librarymain menuSuccessful Exit from Menu";
+        testReaderWriter.consoleInput("3\nlib-1000\nuser1\nS C J P\n4\n0");
+        String expected = "main menuEnter library numberEnter passwordbooksSelect a Item by entering the titleS C J P returned to the librarymain menuSuccessful Exit from MenuDo you want to log out?? \n" +
+                "Yes(1) No(0)User logged out";
         subMenu.menu(list, bookLibraryManager,testReaderWriter, manager);
         assertEquals(expected,testReaderWriter.consoleOutput());
 
@@ -126,8 +130,9 @@ public class SubMenuTest {
         when(bookLibraryManager.getItem("S C J P")).thenReturn(book1);
         when(bookLibraryManager.displaySpecificItemListDetails(list)).thenReturn("books");
         doNothing().when(bookLibraryManager).returnBookToLibrary(book1, user);
-        testReaderWriter.consoleInput("3\nlib-1000\nuasd\n4");
-        String expected = "main menuEnter library numberEnter passwordNot a valid usermain menuSuccessful Exit from Menu";
+        testReaderWriter.consoleInput("3\nlib-1000\nuasd\n4\n0");
+        String expected = "main menuEnter library numberEnter passwordNot a valid usermain menuSuccessful Exit from MenuDo you want to log out?? \n" +
+                "Yes(1) No(0)User logged out";
         subMenu.menu(list, bookLibraryManager,testReaderWriter, manager);
         assertEquals(expected,testReaderWriter.consoleOutput());
 
@@ -135,7 +140,7 @@ public class SubMenuTest {
 
     @Test
     public void shouldReturnWhen4IsPassed() throws Exception {
-        testReaderWriter.consoleInput("4");
+        testReaderWriter.consoleInput("4\n0");
         List<Item> list= bookLibraryManager.getItemListByCategory("book");
         subMenu =new SubMenu(testReaderWriter, bookLibraryManager);
 
@@ -145,6 +150,7 @@ public class SubMenuTest {
                 " 2 ---- Check Out a Item\n" +
                 " 3 ---- Return a Item\n" +
                 " 4 ---- Exit\n" +
-                "Enter your choiceSuccessful Exit from Menu",testReaderWriter.consoleOutput());
+                "Enter your choiceSuccessful Exit from MenuDo you want to log out?? \n" +
+                "Yes(1) No(0)User logged out",testReaderWriter.consoleOutput());
     }
 }
