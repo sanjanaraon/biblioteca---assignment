@@ -37,13 +37,12 @@ public class CheckOutBookMenuAction implements MenuAction {
     }
 
     private void accessCheckOutMenu(LibraryManager libraryManager, InputOutput readerWriter, List<? extends Item> list, UserInfo user) throws IOException {
-        printMessage(libraryManager.displaySpecificItemListDetails(list), readerWriter);
+        printMessage(libraryManager.displayItemDetailsInTableForm(list), readerWriter);
         printMessage("Select a Item by entering the title", readerWriter);
         String title = acceptInput(readerWriter);
         if (libraryManager.validTitle(title)) {
             Item item = libraryManager.getItem(title);
             try {
-                System.out.println(user);
                 libraryManager.checkOutFromLibrary(item,user);
                 printMessage(item.getTitle() + " is checked out successfully", readerWriter);
             } catch (InvalidItemException e) {
