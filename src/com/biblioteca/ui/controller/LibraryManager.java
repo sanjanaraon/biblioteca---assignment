@@ -126,9 +126,9 @@ public class LibraryManager {
 
     public String displaySpecificItemListDetails(List<? extends Item> list) {
         String result = "";
-        for (Item specificItemList : list) {
-            result += specificItemList + "\n";
-        }
+       for (Item item:list) {
+           result += item + "\n";
+       }
         return result;
     }
 
@@ -159,7 +159,7 @@ public class LibraryManager {
             result+="| Movie Title                           | Movie Release Year           | Movie Director        " +
                     "                  | Movie Rating                   |\n";
         }
-        result += "|" + item.getTitle() + "                  |" + item.getYear() + "        |" + item.getDirector() +
+        result += "|" + item.getTitle() + "                                |" + item.getYear() + "        |" + item.getDirector() +
                 "                     |" + item.getRating() + "        |\n";
         return result;
     }
@@ -168,7 +168,7 @@ public class LibraryManager {
         if(firstCall){
             result+="| Book Title                                          | Book Author                           | Year Of Publish          |\n";
         }
-        result += "|" + item.getTitle() + "                             |" + item.getAuthor() + "                |" + item.getYear() + "   |\n";
+        result += "|" + item.getTitle() + "                                            |" + item.getAuthor() + "                |" + item.getYear() + "   |\n";
         return result;
     }
 
