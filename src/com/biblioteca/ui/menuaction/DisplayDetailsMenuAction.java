@@ -1,5 +1,6 @@
 package com.biblioteca.ui.menuaction;
 
+import com.biblioteca.core.models.UserInfo;
 import com.biblioteca.ui.console.InputOutput;
 import com.biblioteca.core.models.Item;
 import com.biblioteca.ui.controller.LibraryManager;
@@ -18,10 +19,11 @@ public class DisplayDetailsMenuAction implements MenuAction {
 //        printMessage(libraryManager.displayItemDetails(),readerWriter);
 //    }
     @Override
-    public void actionPerformed(LibraryManager libraryManager, InputOutput readerWriter, List<? extends Item> list,AccountManager manager)
+    public UserInfo actionPerformed(LibraryManager libraryManager, InputOutput readerWriter, List<? extends Item> list,AccountManager manager,UserInfo userInfo)
             throws IOException {
         printMessage("Items available for borrowing",readerWriter);
         printMessage(libraryManager.displayItemDetails(list),readerWriter);
+        return null;
     }
 
     public void printMessage(String message, InputOutput readerWriter) throws IOException {
