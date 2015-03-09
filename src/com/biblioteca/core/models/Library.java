@@ -29,26 +29,27 @@ public class Library {
         return itemList;
     }
 
-    public void checkOutItem(Item item) throws InvalidItemException{
+    public void checkOutItem(Item item, UserInfo user) throws InvalidItemException{
         if (itemList.contains(item) && !item.isCheckedOut()) {
-            resetCheckOut(item, true);
+            resetCheckOut(item, true,user);
             return;
         }
         throw new InvalidItemException();
 
     }
 
-    public void returnItem(Item item) throws InvalidItemException {
+    public void returnItem(Item item,UserInfo user) throws InvalidItemException {
         if (itemList.contains(item) && item.isCheckedOut()){
-            resetCheckOut(item, false);
+            resetCheckOut(item, false, user);
             return;
         }
         throw new InvalidItemException();
     }
 
-    private void resetCheckOut(Item item, boolean flag) {
+    private void resetCheckOut(Item item, boolean flag, UserInfo user) {
         for (Item i : itemList) {
             if (i.equals(item)) {
+                i.setBorrower(user.getEmail());
                 i.setCheckedOut(flag);
                 break;
             }
