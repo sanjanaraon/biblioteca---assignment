@@ -33,6 +33,11 @@ list of it's items like checkout,return...
 The biblioteca manager co-ordinates between the library and console app for helping the user access the functions
 of the biblioteca.
 
+Before running the app:
+Go to the root directory of the app and type the cmd  in the console:
+gradle build
+
+to create the build file for easy deployment
 To run the app:
 type the cmd in console of the root directory of the app:java -jar build/libs/TWU_Biblioteca-master.jar
 
